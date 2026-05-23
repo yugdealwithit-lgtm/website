@@ -36,7 +36,7 @@ const MAPS = {
 const C = {
   black:"#0a0a0a",dark:"#111",card:"#161616",
   gold:"#9a7b2e",goldL:"#c9a84c",goldB:"#e8c55a",
-  white:"#f5f3ee",muted:"#888880",border:"#2a2a2a",
+  white:"#f5f3ee",muted:"#cfc8b6",border:"#2a2a2a",
 };
 
 const PHONE = "919319319501";
@@ -251,6 +251,19 @@ const GS = () => (
 
     @media (prefers-reduced-motion: reduce){
       *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+
+    /* ===== Readability pass for body / muted text ===== */
+    body, p, li, span, a, button, input, textarea, label {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    p { line-height: 1.7; letter-spacing: .005em; }
+    /* Lift any muted/grey inline text toward a warm cream for contrast on dark bg */
+    [style*="color:#888"], [style*="color:#999"], [style*="color:#aaa"],
+    [style*="color:#bbb"], [style*="color:#777"], [style*="color:#666"],
+    [style*="color: #888"], [style*="color: #999"], [style*="color: #aaa"] {
+      color: #d6cfbd !important;
     }
   `}</style>
 );
