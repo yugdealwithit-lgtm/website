@@ -36,7 +36,7 @@ const MAPS = {
 const C = {
   black:"#0a0a0a",dark:"#111",card:"#161616",
   gold:"#9a7b2e",goldL:"#c9a84c",goldB:"#e8c55a",
-  white:"#f5f3ee",muted:"#888880",border:"#2a2a2a",
+  white:"#f5f3ee",muted:"#cfc8b6",border:"#2a2a2a",
 };
 
 const PHONE = "919319319501";
