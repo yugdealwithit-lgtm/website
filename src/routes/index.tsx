@@ -192,6 +192,66 @@ const GS = () => (
       .contact-sec{padding:80px 40px!important;}
     }
     .legend-dot{width:13px;height:13px;border-radius:2px;display:inline-block;}
+
+    /* ===== Visual effects ===== */
+    @keyframes rscFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rscFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes rscShimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes rscFloat {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-8px); }
+    }
+
+    .proj-card{
+      animation: rscFadeUp .8s cubic-bezier(.2,.7,.2,1) both;
+      transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease;
+      will-change: transform;
+    }
+    .proj-card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px -20px rgba(0,0,0,.35);
+    }
+    .proj-card-img{ overflow:hidden; }
+    .proj-card-img img{
+      transition: transform 1.1s cubic-bezier(.2,.7,.2,1), filter .6s ease;
+    }
+    .proj-card:hover .proj-card-img img{
+      transform: scale(1.08);
+      filter: saturate(1.1) contrast(1.03);
+    }
+
+    /* Smooth image reveal everywhere */
+    img { transition: transform .6s ease, opacity .6s ease; }
+
+    /* Hero headline reveal */
+    .detail-hero-h1, .serif {
+      animation: rscFadeUp 1s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    /* Buttons / link lift */
+    button, a {
+      transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, color .25s ease, opacity .25s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+
+    /* Ticker shimmer accent */
+    .legend-dot { box-shadow: 0 0 0 0 rgba(255,255,255,.6); animation: rscFloat 3s ease-in-out infinite; }
+
+    /* Page fade in */
+    body { animation: rscFadeIn .6s ease both; }
+
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   `}</style>
 );
 
