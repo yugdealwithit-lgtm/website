@@ -252,6 +252,19 @@ const GS = () => (
     @media (prefers-reduced-motion: reduce){
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+
+    /* ===== Readability pass for body / muted text ===== */
+    body, p, li, span, a, button, input, textarea, label {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    p { line-height: 1.7; letter-spacing: .005em; }
+    /* Lift any muted/grey inline text toward a warm cream for contrast on dark bg */
+    [style*="color:#888"], [style*="color:#999"], [style*="color:#aaa"],
+    [style*="color:#bbb"], [style*="color:#777"], [style*="color:#666"],
+    [style*="color: #888"], [style*="color: #999"], [style*="color: #aaa"] {
+      color: #d6cfbd !important;
+    }
   `}</style>
 );
 
