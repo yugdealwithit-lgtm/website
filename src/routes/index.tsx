@@ -564,7 +564,7 @@ const HomePage = ({ setPage }) => {
               <em className="gold-shimmer" style={{fontWeight:400}}>First Greenfield</em><br/>
               Smart City
             </h1>
-            <p className="hero-sub" style={{color:C.muted,lineHeight:1.9,marginBottom:28,maxWidth:420}}>
+            <p className="hero-sub text-slate-200" style={{color:C.muted,lineHeight:1.9,marginBottom:28,maxWidth:420}}>
               Premium residential, commercial & industrial plots in Dholera SIR — along the Delhi-Mumbai Industrial Corridor.
             </p>
             <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
