@@ -497,6 +497,10 @@ const Footer = ({ setPage }) => {
                 onMouseEnter={e=>e.target.style.color=C.goldL}
                 onMouseLeave={e=>e.target.style.color=C.muted}>{p}</div>
             ))}
+            <Link to="/login" style={{color:C.muted,fontSize:12,marginBottom:9,cursor:"pointer",
+              display:"block",textDecoration:"none",transition:"color .3s"}}
+              onMouseEnter={e=>(e.target as HTMLElement).style.color=C.goldL}
+              onMouseLeave={e=>(e.target as HTMLElement).style.color=C.muted}>Admin</Link>
           </div>
           <div>
             <div className="sl" style={{marginBottom:14}}>Projects</div>
@@ -528,7 +532,6 @@ const Footer = ({ setPage }) => {
         <div style={{borderTop:`1px solid ${C.border}`,paddingTop:18,display:"flex",
           justifyContent:"space-between",flexWrap:"wrap",gap:8,alignItems:"center"}}>
           <span style={{color:C.muted,fontSize:10}}>© 2026 DealWithIt Real Estate.</span>
-          <Link to="/login" style={{color:C.muted,fontSize:10,textDecoration:"none",opacity:0.6}}>Admin</Link>
           <span style={{color:C.muted,fontSize:10}}>Dholera, Gujarat, India</span>
         </div>
       </div>
