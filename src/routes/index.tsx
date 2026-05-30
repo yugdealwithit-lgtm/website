@@ -1180,11 +1180,84 @@ const PROJECTS = {
     locationBenefits:[{icon:"🛣️",title:"Expressway Access",desc:"Ahmedabad-Dholera Expressway"},{icon:"✈️",title:"Dholera Airport",desc:"Dholera International Airport nearby"},{icon:"🏢",title:"ABCD Building",desc:"Central admin hub"},{icon:"☀️",title:"Tata Solar Park",desc:"5000 MW solar park"},{icon:"💻",title:"Semiconductor Hub",desc:"Tata Electronics FAB plant"},{icon:"⚡",title:"Activation Area",desc:"22.5 sq.km activated zone"}]},
 };
 
+// ── BLOGS
+const BLOG_POSTS = [
+  {id:"dholera-investment-2026",title:"Why Dholera SIR Is India's Top Real Estate Investment in 2026",cat:"Investment",date:"May 28, 2026",read:"6 min read",img:IMGS.pride_megaprojects,
+    excerpt:"Dholera Smart City is rapidly becoming the most talked-about real estate destination in India. With the Tata Semiconductor FAB plant, Dholera International Airport, and a 920 km² master plan, here's why early investors are seeing exceptional returns."},
+  {id:"plot-buying-guide",title:"A Complete Guide to Buying NA Plots in Dholera",cat:"Buying Guide",date:"May 20, 2026",read:"8 min read",img:IMGS.aerox_gateway,
+    excerpt:"From title verification to NA/NOC certification — everything you need to know before you book a residential or commercial plot in Dholera SIR. A step-by-step walkthrough from RSC Group's experts."},
+  {id:"dholera-vs-gift-city",title:"Dholera vs GIFT City: Where Should You Invest?",cat:"Market Insights",date:"May 12, 2026",read:"5 min read",img:IMGS.regalia_gateway,
+    excerpt:"Both are Gujarat's flagship smart cities — but they serve very different investors. We compare appreciation potential, infrastructure timelines, and ticket sizes to help you decide."},
+  {id:"abcd-building-impact",title:"The ABCD Building Effect: How Dholera's Admin Hub Is Driving Plot Prices",cat:"Location",date:"Apr 30, 2026",read:"4 min read",img:IMGS.paradise_cover,
+    excerpt:"Plots within 10 minutes of the ABCD Building have appreciated faster than the wider Dholera market. Here's the data behind the trend — and what it means for projects like Pride and Aerox."},
+  {id:"tata-semiconductor",title:"What the Tata Semiconductor FAB Plant Means for Dholera Real Estate",cat:"Industry",date:"Apr 18, 2026",read:"7 min read",img:IMGS.pride_megaprojects,
+    excerpt:"India's first semiconductor fabrication plant is coming up in Dholera. We break down the jobs, the housing demand, and the long-term impact on plot prices in surrounding villages."},
+  {id:"rsc-pride-walkthrough",title:"Inside RSC Pride: A Walkthrough of Our Flagship Kasindra Project",cat:"Project Spotlight",date:"Apr 05, 2026",read:"5 min read",img:IMGS.pride_cover,
+    excerpt:"From the grand entrance to plot demarcations and amenity zones — take a guided tour of Pride 1, 2 and 3 at Kasindra, just 9 minutes from the ABCD Building."},
+];
+
+const BlogsPage = ({ setPage }) => {
+  const isMob = useIsMobile();
+  return (
+    <div>
+      <div className="proj-hero" style={{background:`linear-gradient(135deg,${C.black},${C.card})`,
+        display:"flex",alignItems:"flex-end",paddingBottom:44,borderBottom:`1px solid ${C.border}`}}>
+        <div className="proj-hero-inner" style={{maxWidth:1200,margin:"0 auto",width:"100%"}}>
+          <div className="sl" style={{marginBottom:10}}>Insights & Updates</div>
+          <h1 className="serif proj-hero-h1" style={{fontWeight:300}}>
+            DealWithIt <em className="gold-text">Blogs</em>
+          </h1>
+          <p style={{fontSize:13,color:C.muted,marginTop:14,maxWidth:620,lineHeight:1.8}}>
+            Market insights, buying guides and project updates from the RSC Group Dholera team.
+          </p>
+        </div>
+      </div>
+      <div style={{maxWidth:1200,margin:"0 auto",padding:isMob?"28px 16px 48px":"48px 20px 80px",
+        display:"grid",gridTemplateColumns:isMob?"1fr":"repeat(auto-fill,minmax(320px,1fr))",gap:isMob?20:24}}>
+        {BLOG_POSTS.map(b=>(
+          <article key={b.id} style={{background:C.card,border:`1px solid ${C.border}`,overflow:"hidden",
+            cursor:"pointer",transition:"all .4s",display:"flex",flexDirection:"column"}}
+            onMouseEnter={e=>{e.currentTarget.style.borderColor=C.gold;e.currentTarget.style.transform="translateY(-3px)";}}
+            onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.transform="translateY(0)";}}>
+            <div style={{position:"relative",overflow:"hidden",aspectRatio:"16/9"}}>
+              <img src={b.img} alt={b.title} style={{width:"100%",height:"100%",objectFit:"cover"}}/>
+              <div style={{position:"absolute",inset:0,background:`linear-gradient(to top,${C.black}aa 0%,transparent 60%)`}}/>
+              <div style={{position:"absolute",top:12,left:12,background:`${C.gold}22`,border:`1px solid ${C.gold}55`,
+                padding:"4px 10px",fontSize:9,letterSpacing:1.5,color:C.goldL}}>{b.cat}</div>
+            </div>
+            <div style={{padding:"20px 22px 24px",display:"flex",flexDirection:"column",flex:1}}>
+              <div style={{display:"flex",gap:14,fontSize:10,color:C.muted,letterSpacing:1,marginBottom:10}}>
+                <span>{b.date}</span><span>•</span><span>{b.read}</span>
+              </div>
+              <h3 className="serif" style={{fontSize:18,fontWeight:500,lineHeight:1.35,marginBottom:10,color:C.white}}>{b.title}</h3>
+              <p style={{fontSize:12,color:C.muted,lineHeight:1.75,marginBottom:18,flex:1}}>{b.excerpt}</p>
+              <div style={{display:"flex",alignItems:"center",gap:7,color:C.goldL,fontSize:10,letterSpacing:2}}>
+                <span>READ MORE</span><span>→</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div style={{maxWidth:1200,margin:"0 auto",padding:isMob?"0 16px 56px":"0 20px 96px"}}>
+        <div style={{background:`linear-gradient(135deg,${C.gold}1a,${C.card})`,border:`1px solid ${C.gold}44`,
+          padding:isMob?"28px 22px":"40px 44px",textAlign:"center"}}>
+          <div className="sl" style={{marginBottom:10,color:C.goldL}}>Ready to invest?</div>
+          <h2 className="serif" style={{fontSize:isMob?22:28,fontWeight:300,marginBottom:14}}>
+            Talk to a Dholera <em className="gold-text">specialist</em>
+          </h2>
+          <p style={{fontSize:12,color:C.muted,marginBottom:20,maxWidth:520,margin:"0 auto 20px",lineHeight:1.8}}>
+            Get a personalised site visit, plot availability and pricing for Pride, Aerox, Regalia 3 and Paradise.
+          </p>
+          <button className="btn-gold" onClick={()=>{setPage("contact");window.scrollTo(0,0);}}
+            style={{padding:"12px 26px",fontSize:11}}>Enquire Now</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 function Index() {
   const [page,setPage]=useState("home");
-}
-
-// placeholder removed
   const render=()=>{
     switch(page){
       case "home":return <HomePage setPage={setPage}/>;
