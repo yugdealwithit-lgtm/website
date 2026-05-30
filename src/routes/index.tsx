@@ -1039,7 +1039,7 @@ const ContactPage = () => {
             {[
               {icon:"📞",t:"Phone",v:PHONE_DISPLAY,href:`tel:+${PHONE}`},
               {isWa:true,t:"WhatsApp",v:"Chat directly with us",href:waMsg("Hi! I'd like to know more about your Dholera projects.")},
-              {isInsta:true,t:"Instagram",v:"@dealwithit.reality",href:INSTA},
+              {isInsta:true,t:"Instagram",v:"@dealwithit.realty",href:INSTA},
               {icon:"✉️",t:"Email",v:"support@rscgroupco.com",href:"mailto:support@rscgroupco.com"},
             ].map((c,i)=>(
               <a key={i} href={c.href} target={c.href.startsWith("http")?"_blank":"_self"} rel="noreferrer"
