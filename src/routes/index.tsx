@@ -1191,6 +1191,7 @@ function Index() {
       case "aerox":return <ProjectPage proj={PROJECTS.aerox} setPage={setPage}/>;
       case "regalia":return <ProjectPage proj={PROJECTS.regalia} setPage={setPage}/>;
       case "paradise":return <ProjectPage proj={PROJECTS.paradise} setPage={setPage}/>;
+      case "blogs":return <BlogsPage setPage={setPage}/>;
       default:return <HomePage setPage={setPage}/>;
     }
   };
