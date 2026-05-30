@@ -359,7 +359,7 @@ const Nav = ({ page, setPage }) => {
   const go = p => { setPage(p); window.scrollTo(0,0); setOpen(false); };
   const links = [
     {l:"Home",p:"home"},{l:"Projects",p:"projects"},{l:"Pride",p:"pride"},
-    {l:"Aerox",p:"aerox"},{l:"Regalia 3",p:"regalia"},{l:"Paradise",p:"paradise"},{l:"Contact",p:"contact"},
+    {l:"Aerox",p:"aerox"},{l:"Regalia 3",p:"regalia"},{l:"Paradise",p:"paradise"},{l:"Blogs",p:"blogs"},{l:"Contact",p:"contact"},
   ];
   return (
     <>
