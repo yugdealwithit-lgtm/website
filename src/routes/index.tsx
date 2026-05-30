@@ -41,7 +41,7 @@ const C = {
 
 const PHONE = "919319319501";
 const PHONE_DISPLAY = "+91 93193 19501";
-const INSTA = "https://instagram.com/dealwithit.reality";
+const INSTA = "https://instagram.com/dealwithit.realty";
 const WA_BASE = `https://wa.me/${PHONE}`;
 const waMsg = (msg) => `${WA_BASE}?text=${encodeURIComponent(msg)}`;
 
