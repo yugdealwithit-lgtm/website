@@ -1,0 +1,49 @@
+modules = ["nodejs-20", "web"]
+[agent]
+expertMode = true
+stack = "BEST_EFFORT_FALLBACK"
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+SUPABASE_PUBLISHABLE_KEY = "sb_publishable_dH3QGp3p2faP7KU0_-W0Ng_H3C-RLBu"
+SUPABASE_URL = "https://qxkzevsouifqjnleewzp.supabase.co"
+VITE_SUPABASE_PROJECT_ID = "qxkzevsouifqjnleewzp"
+VITE_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_dH3QGp3p2faP7KU0_-W0Ng_H3C-RLBu"
+VITE_SUPABASE_URL = "https://qxkzevsouifqjnleewzp.supabase.co"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npm", "run", "preview"]
+build = ["npm", "run", "build"]
