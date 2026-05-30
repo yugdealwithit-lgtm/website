@@ -1,7 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -56,12 +55,6 @@ function LoginPage() {
     }
   };
 
-  const handleGoogle = async () => {
-    setError(null); setLoading(true);
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: `${window.location.origin}/admin` });
-    if (result.error) { setError(result.error.message); setLoading(false); }
-  };
-
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#f5f0e0", display: "flex", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: "system-ui, sans-serif" }}>
       <div style={{ width: "100%", maxWidth: 420, background: "#141414", border: "1px solid #2a2a2a", padding: 36 }}>
@@ -70,14 +63,8 @@ function LoginPage() {
           {mode === "signin" ? "Admin sign in" : "Create account"}
         </h1>
         <p style={{ fontSize: 12, color: "#888", marginBottom: 24, lineHeight: 1.6 }}>
-          {mode === "signin" ? "Sign in to manage your blog posts." : "First account becomes admin. Others must be promoted by an existing admin."}
+          {mode === "signin" ? "Sign in to manage your blog posts." : "The first account created automatically becomes admin. Others must be promoted by an existing admin."}
         </p>
-
-        <button onClick={handleGoogle} disabled={loading}
-          style={{ width: "100%", padding: "12px", background: "#fff", color: "#000", border: "none", fontSize: 13, fontWeight: 500, cursor: "pointer", marginBottom: 16 }}>
-          Continue with Google
-        </button>
-        <div style={{ textAlign: "center", color: "#555", fontSize: 11, margin: "16px 0", letterSpacing: 2 }}>OR</div>
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
           <input type="email" required placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
