@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState, useEffect, useRef } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 
 const IMGS = {
@@ -526,8 +526,9 @@ const Footer = ({ setPage }) => {
           </div>
         </div>
         <div style={{borderTop:`1px solid ${C.border}`,paddingTop:18,display:"flex",
-          justifyContent:"space-between",flexWrap:"wrap",gap:8}}>
+          justifyContent:"space-between",flexWrap:"wrap",gap:8,alignItems:"center"}}>
           <span style={{color:C.muted,fontSize:10}}>© 2026 DealWithIt Real Estate.</span>
+          <Link to="/login" style={{color:C.muted,fontSize:10,textDecoration:"none",opacity:0.6}}>Admin</Link>
           <span style={{color:C.muted,fontSize:10}}>Dholera, Gujarat, India</span>
         </div>
       </div>
