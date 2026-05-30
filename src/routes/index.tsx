@@ -490,7 +490,7 @@ const Footer = ({ setPage }) => {
           {!isMob && <>
           <div>
             <div className="sl" style={{marginBottom:14}}>Pages</div>
-            {["home","projects","contact"].map(p=>(
+            {["home","projects","blogs","contact"].map(p=>(
               <div key={p} onClick={()=>go(p)} style={{color:C.muted,fontSize:12,marginBottom:9,cursor:"pointer",
                 textTransform:"capitalize",transition:"color .3s"}}
                 onMouseEnter={e=>e.target.style.color=C.goldL}
