@@ -516,7 +516,7 @@ const Footer = ({ setPage }) => {
                 <WaIcon size={14}/> WhatsApp Us
               </a>
               <a href={INSTA} target="_blank" rel="noreferrer" style={{display:"flex",alignItems:"center",gap:8,color:C.muted,fontSize:12,textDecoration:"none"}}>
-                <InstaIcon size={14}/> @dealwithit.reality
+                <InstaIcon size={14}/> @dealwithit.realty
               </a>
               {!isMob && <p style={{color:C.muted,fontSize:12,lineHeight:1.8,marginTop:4}}>
                 904, 9th Floor, Signature-1,<br/>Opp. Andaz Party Plot,<br/>S.G. Highway, Makarba,<br/>Ahmedabad – 380 051
