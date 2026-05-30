@@ -41,7 +41,7 @@ const C = {
 
 const PHONE = "919319319501";
 const PHONE_DISPLAY = "+91 93193 19501";
-const INSTA = "https://instagram.com/dealwithit.reality";
+const INSTA = "https://instagram.com/dealwithit.realty";
 const WA_BASE = `https://wa.me/${PHONE}`;
 const waMsg = (msg) => `${WA_BASE}?text=${encodeURIComponent(msg)}`;
 
@@ -1039,7 +1039,7 @@ const ContactPage = () => {
             {[
               {icon:"📞",t:"Phone",v:PHONE_DISPLAY,href:`tel:+${PHONE}`},
               {isWa:true,t:"WhatsApp",v:"Chat directly with us",href:waMsg("Hi! I'd like to know more about your Dholera projects.")},
-              {isInsta:true,t:"Instagram",v:"@dealwithit.reality",href:INSTA},
+              {isInsta:true,t:"Instagram",v:"@dealwithit.realty",href:INSTA},
               {icon:"✉️",t:"Email",v:"support@rscgroupco.com",href:"mailto:support@rscgroupco.com"},
             ].map((c,i)=>(
               <a key={i} href={c.href} target={c.href.startsWith("http")?"_blank":"_self"} rel="noreferrer"
