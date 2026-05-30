@@ -1182,6 +1182,9 @@ const PROJECTS = {
 
 function Index() {
   const [page,setPage]=useState("home");
+}
+
+// placeholder removed
   const render=()=>{
     switch(page){
       case "home":return <HomePage setPage={setPage}/>;
