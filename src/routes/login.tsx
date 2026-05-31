@@ -37,11 +37,15 @@ function LoginPage() {
     setError(null); setInfo(null); setLoading(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email, password,
           options: { emailRedirectTo: `${window.location.origin}/admin` },
         });
         if (error) throw error;
+        if (data.session) {
+          navigate({ to: "/admin", replace: true });
+          return;
+        }
         setInfo("Check your email to confirm your account, then sign in.");
         setMode("signin");
       } else {
