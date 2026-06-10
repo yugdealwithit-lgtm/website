@@ -1,37 +1,87 @@
 import { useState } from "react";
-import { C, MAPS, waMsg, type MapKey } from "@/lib/site";
+import { C, MAPS, VIRTUAL_TOUR_URL, waMsg, type MapKey } from "@/lib/site";
 import { WaIcon } from "./icons";
 
-/** OpenStreetMap embed with quick links to Google Maps + WhatsApp directions. */
+/** Builds a Google Maps embed URL in satellite mode for the given coordinates. */
+function satelliteEmbedUrl(lat: number, lng: number): string {
+  // !5e1 = satellite layer, 1d500 ≈ zoom-16 scale
+  return (
+    `https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d500` +
+    `!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1` +
+    `!5e1!3m2!1sen!2sin!4v1718006400000`
+  );
+}
+
+/** Google Maps satellite embed + link buttons for Google Maps, Dholera 3D tour, and WhatsApp directions. */
 export const MapEmbed = ({ project }: { project: MapKey }) => {
   const m = MAPS[project];
-  const bbox = `${m.lng - 0.018}%2C${m.lat - 0.013}%2C${m.lng + 0.018}%2C${m.lat + 0.013}`;
-  const src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${m.lat}%2C${m.lng}`;
-  const gmaps = `https://www.google.com/maps?q=${m.lat},${m.lng}`;
+  const embedUrl = satelliteEmbedUrl(m.lat, m.lng);
+  const gmapsUrl = `https://www.google.com/maps?q=${m.lat},${m.lng}&t=k`;
+
   return (
     <div style={{ border: `1px solid ${C.border}`, overflow: "hidden", borderRadius: 2 }}>
-      <div style={{ background: C.card, padding: "9px 14px", borderBottom: `1px solid ${C.border}` }}>
+      {/* Header */}
+      <div
+        style={{
+          background: C.card,
+          padding: "10px 16px",
+          borderBottom: `1px solid ${C.border}`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
         <span style={{ fontSize: 11, color: C.goldL, letterSpacing: 1 }}>📍 {m.label}</span>
+        <span
+          style={{
+            fontSize: 8,
+            letterSpacing: 2,
+            color: C.muted,
+            border: `1px solid ${C.border}`,
+            padding: "3px 8px",
+          }}
+        >
+          SATELLITE
+        </span>
       </div>
-      <iframe className="map-frame" src={src} title={m.label} loading="lazy" />
+
+      {/* Google Maps satellite iframe */}
+      <iframe
+        src={embedUrl}
+        title={`${m.label} — Satellite View`}
+        className="map-frame"
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="no-referrer-when-downgrade"
+        style={{ display: "block" }}
+      />
+
+      {/* Action row */}
       <div
         style={{
           background: C.card,
           borderTop: `1px solid ${C.border}`,
-          padding: "10px 14px",
+          padding: "12px 16px",
           display: "flex",
           gap: 8,
-          justifyContent: "center",
           flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <a href={gmaps} target="_blank" rel="noreferrer">
-          <button className="btn-gold" style={{ padding: "9px 16px", fontSize: 10 }}>🗺️ Google Maps</button>
+        <a href={gmapsUrl} target="_blank" rel="noreferrer">
+          <button className="btn-gold" style={{ padding: "9px 14px", fontSize: 10 }}>
+            🗺️ Open in Google Maps
+          </button>
+        </a>
+        <a href={VIRTUAL_TOUR_URL} target="_blank" rel="noreferrer">
+          <button className="btn-out" style={{ padding: "9px 14px", fontSize: 10 }}>
+            🌐 Explore Dholera in 3D
+          </button>
         </a>
         <a href={waMsg(`Hi! I want directions to ${m.label}.`)} target="_blank" rel="noreferrer">
-          <button className="btn-wa" style={{ padding: "9px 16px", fontSize: 10 }}>
-            <WaIcon size={13} />
-            Directions
+          <button className="btn-wa" style={{ padding: "9px 14px", fontSize: 10 }}>
+            <WaIcon size={13} /> Directions
           </button>
         </a>
       </div>

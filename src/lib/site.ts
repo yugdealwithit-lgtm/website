@@ -25,6 +25,10 @@ export const WA_BASE = `https://wa.me/${PHONE}`;
 export const waMsg = (msg: string): string =>
   `${WA_BASE}?text=${encodeURIComponent(msg)}`;
 
+/** Government Dholera SIR 3D virtual tour (DICDL). */
+export const VIRTUAL_TOUR_URL =
+  "https://dholera.gujarat.gov.in/dholera_virtual_tours/static/src/Dholera%20SIR/data/index.htm";
+
 /** Real GPS coordinates for each project (used by the location map). */
 export const MAPS = {
   pride: { lat: 22.4168, lng: 72.1045, zoom: 16, label: "RSC Pride — Kasindra, Dholera" },
