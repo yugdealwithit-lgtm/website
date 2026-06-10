@@ -122,6 +122,21 @@ export const GlobalStyles = () => (
       .show-mob{display:none!important;}
     }
 
+    /* ── Scan / grid hero background ── */
+    @keyframes dotPulse{0%,100%{opacity:.06}50%{opacity:.14}}
+    @keyframes scanLine{from{transform:translateY(-100vh)}to{transform:translateY(200vh)}}
+    .hero-dot-grid{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(154,123,46,.4) 1px,transparent 1px);background-size:38px 38px;animation:dotPulse 5s ease-in-out infinite;mask-image:radial-gradient(ellipse at 65% 45%,black 15%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 65% 45%,black 15%,transparent 70%);}
+    .scan-line{position:absolute;left:0;right:0;height:80px;pointer-events:none;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.06),transparent);animation:scanLine 10s linear infinite;}
+
+    /* ── Scroll progress ── */
+    .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#9a7b2e,#e8c55a,#9a7b2e);z-index:9999;transition:width .1s linear;pointer-events:none;}
+
+    /* ── SVG icon circle ── */
+    .icon-circle{width:48px;height:48px;border-radius:50%;border:1px solid rgba(154,123,46,.27);background:rgba(154,123,46,.05);display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:border-color .3s,background .3s,transform .3s;}
+    .why-card:hover .icon-circle{border-color:rgba(201,168,76,.6);background:rgba(154,123,46,.12);transform:scale(1.08);}
+    .why-card{transition:background .3s;}
+    .why-card:hover{background:rgba(154,123,46,.04)!important;}
+
     @media (prefers-reduced-motion: reduce){
       .dwi-site *,.dwi-site *::before,.dwi-site *::after{animation:none!important;transition:none!important;}
     }

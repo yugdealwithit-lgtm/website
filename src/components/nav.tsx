@@ -30,9 +30,15 @@ const Logo = ({ size = 26 }: { size?: number }) => (
 export const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrollPct, setScrollPct] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      setScrollPct(pct);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
@@ -48,6 +54,7 @@ export const Nav = () => {
 
   return (
     <>
+      <div className="scroll-progress" style={{ width: `${scrollPct}%` }} />
       <nav
         style={{
           position: "fixed",
