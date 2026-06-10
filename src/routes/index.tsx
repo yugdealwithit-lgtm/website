@@ -112,6 +112,28 @@ const WHY: WhyItem[] = [
   { icon: iconSvg(<path d="M2 20V8l6 4V8l6 4V4l8 4v12H2z" />), t: "Industrial Park", d: "DMIC — global manufacturing & trading hub" },
 ];
 
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div
+      style={{ borderBottom: `1px solid ${C.border}`, transition: "background .25s" }}
+      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = `${C.gold}06`)}
+      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
+    >
+      <button
+        onClick={() => setOpen((v) => !v)}
+        style={{ width: "100%", background: "none", border: "none", cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 4px", gap: 16, textAlign: "left" }}
+      >
+        <span style={{ fontSize: "clamp(13px,1.3vw,15px)", fontWeight: 500, color: C.white, lineHeight: 1.4 }}>{q}</span>
+        <span style={{ color: C.goldL, fontSize: 20, flexShrink: 0, transform: open ? "rotate(45deg)" : "none", transition: "transform .25s" }}>+</span>
+      </button>
+      {open && (
+        <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.85, padding: "0 4px 20px", maxWidth: 740 }}>{a}</p>
+      )}
+    </div>
+  );
+}
+
 function HomePage() {
   useReveal();
   return (
@@ -339,6 +361,22 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ── FAQ ── */}
+      <section style={{ maxWidth: 860, margin: "0 auto", padding: "clamp(60px,9vw,100px) clamp(18px,5vw,40px)" }}>
+        <div className="reveal-on-scroll" style={{ textAlign: "center", marginBottom: 52 }}>
+          <div className="sl" style={{ marginBottom: 10 }}>Got Questions?</div>
+          <div className="divl divc" />
+          <h2 className="serif" style={{ fontWeight: 400, fontSize: "clamp(28px,4vw,52px)" }}>
+            Frequently Asked <em className="gold-text">Questions</em>
+          </h2>
+        </div>
+        <div className="reveal-on-scroll" style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {FAQ_LD.mainEntity.map((q, i) => (
+            <FaqItem key={i} q={q.name} a={q.acceptedAnswer.text} />
+          ))}
+        </div>
+      </section>
+
       {/* Responsive: 2-column layouts at desktop */}
       <style>{`
         @media(min-width:900px){
@@ -378,10 +416,82 @@ const ORG_LD = {
   ],
 };
 
+const FAQ_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "How can I buy plots in Dholera Smart City?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "You can buy plots in Dholera SIR through DealWithIt Real Estate — an authorised partner of RSC Group Dholera. Contact us via WhatsApp at +91 93193 19501 or book a free site visit through our website. All our plots are NA/NOC certified and 100% title clear.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the price of plots in Dholera?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Plot prices in Dholera SIR vary by project and location. RSC Pride (Kasindra) starts from competitive rates with preferred plot premiums of ₹250/sq.yd. RSC Aerox (Pipli) and Regalia 3 (Cher) have premiums from ₹500/sq.yd. Contact us for the latest pricing and available inventory.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Dholera SIR a good investment in 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. Dholera SIR is India's first greenfield smart city and part of the Delhi-Mumbai Industrial Corridor. With the Tata Semiconductor FAB plant, Dholera International Airport, 6-lane NH-751 expressway, and 5000 MW Tata Solar Park all under development, early investors are seeing exceptional appreciation. Plots are 100% title clear with NA/NOC approval.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are the plots in Dholera NA and NOC certified?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. All RSC Group Dholera plots — Pride, Aerox, Regalia 3, and Paradise — are NA (Non-Agricultural), NOC certified, and 100% title clear with Plan Pass approval. This makes them legally safe for investment and construction.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How far is Dholera from Ahmedabad?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Dholera SIR is approximately 100 km south of Ahmedabad, connected via the 109 km six-lane Ahmedabad-Dholera Expressway (NH-751). The drive takes under 90 minutes. Future metro connectivity from Gandhinagar to Dholera will further reduce travel time.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is EMI available for Dholera plots?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, EMI options are available on RSC Group Dholera plots. Contact DealWithIt Real Estate at +91 93193 19501 to discuss flexible payment plans tailored to your budget.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What plot sizes are available in Dholera?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "RSC Group Dholera offers plots across multiple projects: RSC Pride has 400+ plots of 150–400 sq.yd in Kasindra; Aerox has 350+ plots of 144–430 sq.yd in Pipli; Regalia 3 has 22 exclusive plots of 444.76 sq.yd in Cher; Paradise has 200+ plots of 150–500 sq.yd in Gamph, Dholera.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Who is RSC Group Dholera?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "RSC Group Dholera is a pioneer real estate developer in Dholera SIR, founded in 2010 and led by Mr. Ramrajsinh Chudasama (Director, Rtd. Army). With 15+ successful projects in Dholera, RSC Group is one of the most trusted names in Dholera Smart City real estate.",
+      },
+    },
+  ],
+};
+
 function HomeRoute() {
   return (
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }} />
       <HomePage />
     </SiteShell>
   );
