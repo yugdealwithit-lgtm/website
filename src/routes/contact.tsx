@@ -21,15 +21,40 @@ const CONTACT_METHODS = [
   { kind: "email" as const, t: "Email", v: EMAIL, href: `mailto:${EMAIL}` },
 ];
 
+const CRM_WEBHOOK = "https://crm-api-server-yugdealwithit-6735s-projects.vercel.app/api/webhook/site";
+
 function ContactPage() {
   const [form, setForm] = useState<FormState>(EMPTY);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handle = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const submit = () => {
-    if (form.name && form.phone) setSent(true);
+  const submit = async () => {
+    if (!form.name || !form.phone) return;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch(CRM_WEBHOOK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          phone: form.phone,
+          email: form.email || null,
+          website_page: typeof window !== "undefined" ? window.location.href : "/contact",
+        }),
+      });
+      if (!res.ok) throw new Error(`Server error ${res.status}`);
+      setSent(true);
+    } catch (err) {
+      console.error("Enquiry submission failed:", err);
+      setSubmitError("Something went wrong. Please try WhatsApp or call us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const waEnquiry = waMsg(
@@ -174,11 +199,16 @@ function ContactPage() {
                   <textarea name="message" value={form.message} onChange={handle} rows={4} placeholder="Tell us about your investment goals..." style={{ resize: "vertical" }} />
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
-                  <button className="btn-gold" onClick={submit} style={{ width: "100%", padding: "13px 8px" }}>Send Enquiry</button>
+                  <button className="btn-gold" onClick={submit} disabled={submitting} style={{ width: "100%", padding: "13px 8px", opacity: submitting ? 0.7 : 1 }}>
+                    {submitting ? "Sending…" : "Send Enquiry"}
+                  </button>
                   <a href={waEnquiry} target="_blank" rel="noreferrer" style={{ display: "block" }}>
                     <button className="btn-wa" style={{ width: "100%", padding: "13px 8px" }}><WaIcon size={13} />WhatsApp</button>
                   </a>
                 </div>
+                {submitError && (
+                  <p style={{ fontSize: 11, color: "#e05050", marginTop: 10, textAlign: "center", lineHeight: 1.6 }}>{submitError}</p>
+                )}
                 <p style={{ fontSize: 10, color: C.muted, marginTop: 12, textAlign: "center", lineHeight: 1.6 }}>
                   Site visits available 365 days a year.
                 </p>
