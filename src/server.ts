@@ -2,6 +2,7 @@ import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
+import { handleSitemapRequest } from "./lib/sitemap";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -69,6 +70,15 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      // Dynamic sitemap: generated from the live `blogs` table so newly
+      // published posts appear without a redeploy. Served here (not via a
+      // file route) because this TanStack Start version has no server-route
+      // API, and the static public/sitemap.xml was removed so it can't shadow.
+      const { pathname } = new URL(request.url);
+      if (pathname === "/sitemap.xml") {
+        return await handleSitemapRequest();
+      }
+
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
