@@ -70,12 +70,27 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const url = new URL(request.url);
+
+      // Permanent HTTP -> HTTPS redirect for all paths. Behind Cloudflare the
+      // original scheme arrives via the CF-Visitor header (and X-Forwarded-Proto),
+      // since the Worker may otherwise see https. (Belt-and-suspenders for the
+      // zone's "Always Use HTTPS" setting.)
+      const cfVisitor = request.headers.get("cf-visitor") ?? "";
+      const isHttp =
+        url.protocol === "http:" ||
+        request.headers.get("x-forwarded-proto") === "http" ||
+        /"scheme"\s*:\s*"http"/.test(cfVisitor);
+      if (isHttp) {
+        url.protocol = "https:";
+        return Response.redirect(url.toString(), 301);
+      }
+
       // Dynamic sitemap: generated from the live `blogs` table so newly
       // published posts appear without a redeploy. Served here (not via a
       // file route) because this TanStack Start version has no server-route
       // API, and the static public/sitemap.xml was removed so it can't shadow.
-      const { pathname } = new URL(request.url);
-      if (pathname === "/sitemap.xml") {
+      if (url.pathname === "/sitemap.xml") {
         return await handleSitemapRequest();
       }
 

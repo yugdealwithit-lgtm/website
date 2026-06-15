@@ -34,6 +34,12 @@ export interface Project {
   surveyInfo: SurveyRow[];
   amenities: Amenity[];
   locationBenefits: LocationBenefit[];
+  // Optional per-project SEO / GEO overrides.
+  seoTitle?: string;
+  seoDescription?: string;
+  schemaName?: string;
+  schemaDescription?: string;
+  faqs?: { q: string; a: string; inSchema?: boolean }[];
 }
 
 export type ProjectId = "pride" | "aerox" | "regalia" | "paradise";
@@ -102,6 +108,26 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "💻", title: "Tata Semiconductor", desc: "India's first semiconductor FAB plant nearby" },
       { icon: "☀️", title: "Tata Solar Park", desc: "5000 MW world's largest solar park" },
     ],
+    seoTitle: "RSC Pride Dholera – Plot Prices, Sizes & Booking | DealWithIt Realty",
+    seoDescription:
+      "Book RERA-approved residential plots in RSC Pride, Dholera SIR through DealWithIt Realty. NA/NOC title-clear plots, flexible payment plans, and full investment guidance.",
+    schemaName: "RSC Pride - Dholera SIR",
+    schemaDescription:
+      "RERA-approved residential plots in RSC Pride, Dholera Special Investment Region, Gujarat. NA/NOC title-clear plots offered through DealWithIt Realty.",
+    faqs: [
+      {
+        q: "Is this project RERA-approved?",
+        a: "Yes, the project is RERA-registered with NA/NOC title-clear plots ready for immediate registration.",
+        inSchema: true,
+      },
+      {
+        q: "Who is DealWithIt Realty?",
+        a: "DealWithIt Realty is an authorized real estate sales partner for plot investments in Dholera SIR, including RSC Pride and Aerox.",
+        inSchema: true,
+      },
+      { q: "What plot sizes are available?", a: "Plots range from 150–400 Sq.Yd." },
+      { q: "What is the current price per sq.yd.?", a: "[FILL IN: current pricing]" },
+    ],
   },
   aerox: {
     id: "aerox",
@@ -152,6 +178,26 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "🚇", title: "Ambli Metro Station", desc: "Metro to Ahmedabad and GIFT City" },
       { icon: "🏢", title: "ABCD Building", desc: "Central admin of Dholera Smart City" },
       { icon: "⚡", title: "Activation Area", desc: "Near 22.5 sq.km Dholera activation zone" },
+    ],
+    seoTitle: "Aerox Dholera SIR – Residential & Commercial Plots | DealWithIt Realty",
+    seoDescription:
+      "Aerox in Dholera SIR offers title-clear residential and commercial plots near the Dholera-Ahmedabad highway. DealWithIt Realty helps you invest with confidence — pricing, sizes, and booking details inside.",
+    schemaName: "Aerox - Dholera SIR",
+    schemaDescription:
+      "RERA-approved residential and commercial plots in Aerox, Dholera Special Investment Region, near the Ahmedabad-Dholera highway. Offered through DealWithIt Realty.",
+    faqs: [
+      {
+        q: "Is this project RERA-approved?",
+        a: "Yes, the project is RERA-registered with NA/NOC title-clear plots ready for immediate registration.",
+        inSchema: true,
+      },
+      {
+        q: "Who is DealWithIt Realty?",
+        a: "DealWithIt Realty is an authorized real estate sales partner for plot investments in Dholera SIR, including RSC Pride and Aerox.",
+        inSchema: true,
+      },
+      { q: "What plot sizes are available?", a: "Plots range from 144–430 Sq.Yd." },
+      { q: "What is the current price per sq.yd.?", a: "[FILL IN: current pricing]" },
     ],
   },
   regalia: {

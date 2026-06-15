@@ -1,23 +1,18 @@
 # DealWithIt Realty
 
-> DealWithIt Realty is a real estate company specializing in RERA-approved residential and commercial plot investments in Dholera SIR (Special Investment Region), Gujarat, India.
+DealWithIt Realty is a RERA-approved real estate sales company specializing in plot investments in Dholera Special Investment Region (SIR), Gujarat, India.
 
-## Projects
-- [RSC Pride](https://dealwithit.org.in/projects/pride): RERA-approved plot investment project in Dholera SIR (flagship Kasindra project).
-- [Aerox](https://dealwithit.org.in/projects/aerox): RERA-approved plot investment project in Dholera SIR.
-- [Regalia 3](https://dealwithit.org.in/projects/regalia): RERA-approved plot investment project in Dholera SIR.
-- [Paradise](https://dealwithit.org.in/projects/paradise): RERA-approved plot investment project in Dholera SIR.
+## Key Projects
+- RSC Pride: Residential plots in Dholera SIR, NA/NOC title-clear, RERA-approved.
+- Aerox: Residential and commercial plots in Dholera SIR, near Ahmedabad-Dholera highway.
 
-## Dholera SIR Investment Guide
-- [Why Dholera SIR Is India's Top Real Estate Investment in 2026](https://dealwithit.org.in/blog/dholera-investment-2026): Overview of Dholera SIR infrastructure, growth drivers, and investment potential.
-- [A Complete Guide to Buying NA Plots in Dholera](https://dealwithit.org.in/blog/plot-buying-guide): How to buy RERA-approved NA plots in Dholera SIR.
-- [The ABCD Building Effect](https://dealwithit.org.in/blog/abcd-building-impact): How Dholera's administrative hub is driving plot prices.
-- [What the Tata Semiconductor FAB Plant Means for Dholera Real Estate](https://dealwithit.org.in/blog/tata-semiconductor): A key growth driver for the region.
-- [All articles](https://dealwithit.org.in/blogs): Full blog index.
+## Pages
+- Homepage: https://dealwithit.org.in/
+- RSC Pride: https://dealwithit.org.in/projects/pride
+- Aerox: https://dealwithit.org.in/projects/aerox
 
-## Contact
-- [Contact DealWithIt Realty](https://dealwithit.org.in/contact)
-Website: https://dealwithit.org.in
+## About
+DealWithIt Realty helps Indian and NRI investors purchase title-clear, RERA-approved plots in Dholera SIR with transparent pricing and end-to-end documentation support.
 
 ## Sitemap
 https://dealwithit.org.in/sitemap.xml

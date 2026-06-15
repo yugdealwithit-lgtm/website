@@ -500,14 +500,14 @@ function HomeRoute() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Buy Plots in Dholera Smart City | DealWithIt Real Estate" },
-      { name: "description", content: "Invest in India's first greenfield smart city. Premium residential & commercial plots in Dholera SIR by RSC Group — NA/NOC certified, 100% title clear. 15+ projects since 2010." },
-      { name: "keywords", content: "dholera plots, dholera smart city, residential plots dholera, dholera sir investment, rsc group dholera, buy plot dholera, dholera real estate" },
-      { property: "og:title", content: "Buy Plots in Dholera Smart City | DealWithIt Real Estate" },
-      { property: "og:description", content: "Premium residential & commercial plots in India's first greenfield smart city. NA/NOC certified, 100% title clear." },
+      { title: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
+      { name: "description", content: "DealWithIt Realty offers RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing, and end-to-end investment support." },
+      { name: "keywords", content: "dholera plots, dholera smart city, residential plots dholera, dholera sir investment, rsc pride dholera, aerox dholera, buy plot dholera, dealwithit realty" },
+      { property: "og:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
+      { property: "og:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing, and end-to-end investment support." },
       { property: "og:url", content: "https://dealwithit.org.in/" },
-      { name: "twitter:title", content: "Buy Plots in Dholera Smart City | DealWithIt Real Estate" },
-      { name: "twitter:description", content: "Premium residential & commercial plots in India's first greenfield smart city. NA/NOC certified, 100% title clear." },
+      { name: "twitter:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
+      { name: "twitter:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing." },
     ],
     links: [
       { rel: "canonical", href: "https://dealwithit.org.in/" },

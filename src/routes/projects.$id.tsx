@@ -252,6 +252,31 @@ function ProjectDetail({ proj }: { proj: Project }) {
         <BookingCard proj={proj} />
       </div>
 
+      {/* FAQ — placeholder ([FILL IN ...]) answers are hidden until filled in. */}
+      {(() => {
+        const visibleFaqs = (proj.faqs ?? []).filter((f) => !f.a.trim().startsWith("[FILL IN"));
+        if (visibleFaqs.length === 0) return null;
+        return (
+          <div style={{ borderTop: `1px solid ${C.border}`, background: C.card }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(40px,6vw,72px) clamp(18px,5vw,40px)" }}>
+              <div className="sl" style={{ marginBottom: 10 }}>FAQ</div>
+              <div className="divl" />
+              <h2 className="serif" style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 400, marginBottom: 28 }}>
+                Frequently Asked <em>Questions</em>
+              </h2>
+              <div>
+                {visibleFaqs.map((f) => (
+                  <div key={f.q} style={{ borderBottom: `1px solid ${C.border}`, padding: "18px 0" }}>
+                    <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: 8 }}>{f.q}</h3>
+                    <p style={{ fontSize: 13.5, color: C.muted, lineHeight: 1.8, margin: 0 }}>{f.a}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       <style>{`
         @media(min-width:1000px){
           .detail-grid{grid-template-columns:1fr 360px!important;}
@@ -266,17 +291,33 @@ function ProjectDetailRoute() {
   const ld = {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
-    name: `RSC ${proj.name} — ${proj.cat}`,
-    description: proj.about,
+    name: proj.schemaName ?? `RSC ${proj.name} — ${proj.cat}`,
+    description: proj.schemaDescription ?? proj.about,
     url: `https://dealwithit.org.in/projects/${proj.id}`,
-    address: { "@type": "PostalAddress", addressLocality: proj.loc, addressRegion: "Gujarat", addressCountry: "IN" },
-    numberOfRooms: proj.plots,
-    floorSize: { "@type": "QuantitativeValue", value: proj.sizes, unitText: "sq.yd" },
-    offeredBy: { "@type": "RealEstateAgent", name: "DealWithIt Real Estate", url: "https://dealwithit.org.in", telephone: "+919319319501" },
+    broker: {
+      "@type": "RealEstateAgent",
+      name: "DealWithIt Realty",
+      url: "https://dealwithit.org.in/",
+    },
+    address: { "@type": "PostalAddress", addressLocality: "Dholera", addressRegion: "Gujarat", addressCountry: "IN" },
   };
+  const schemaFaqs = proj.faqs?.filter((f) => f.inSchema) ?? [];
+  const faqLd =
+    schemaFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: schemaFaqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }
+      : null;
   return (
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
       <ProjectDetail proj={proj} />
     </SiteShell>
   );
@@ -291,10 +332,10 @@ export const Route = createFileRoute("/projects/$id")({
   head: ({ loaderData, params }) => {
     const proj = loaderData?.proj;
     const title = proj
-      ? `RSC ${proj.name} — ${proj.cat} in ${proj.loc} | DealWithIt`
+      ? proj.seoTitle ?? `RSC ${proj.name} — ${proj.cat} in ${proj.loc} | DealWithIt`
       : "Project | DealWithIt Real Estate";
     const desc = proj
-      ? `${proj.about.slice(0, 155)}…`
+      ? proj.seoDescription ?? `${proj.about.slice(0, 155)}…`
       : "Premium plots in Dholera SIR by RSC Group.";
     const url = `https://dealwithit.org.in/projects/${params.id}`;
     return {
