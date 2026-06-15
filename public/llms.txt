@@ -3,14 +3,20 @@
 > DealWithIt Realty is a real estate company specializing in RERA-approved residential and commercial plot investments in Dholera SIR (Special Investment Region), Gujarat, India.
 
 ## Projects
-- [RSC Pride](https://dealwithit.org.in/rsc-pride): RERA-approved plot investment project in Dholera SIR.
-- [Aerox](https://dealwithit.org.in/aerox): RERA-approved plot investment project in Dholera SIR.
-- [Elanza](https://dealwithit.org.in/elanza): RERA-approved plot investment project in Dholera SIR.
+- [RSC Pride](https://dealwithit.org.in/projects/pride): RERA-approved plot investment project in Dholera SIR (flagship Kasindra project).
+- [Aerox](https://dealwithit.org.in/projects/aerox): RERA-approved plot investment project in Dholera SIR.
+- [Regalia 3](https://dealwithit.org.in/projects/regalia): RERA-approved plot investment project in Dholera SIR.
+- [Paradise](https://dealwithit.org.in/projects/paradise): RERA-approved plot investment project in Dholera SIR.
 
 ## Dholera SIR Investment Guide
-- [About Dholera SIR](https://dealwithit.org.in/dholera-sir): Overview of Dholera SIR infrastructure, growth drivers, and investment potential.
+- [Why Dholera SIR Is India's Top Real Estate Investment in 2026](https://dealwithit.org.in/blog/dholera-investment-2026): Overview of Dholera SIR infrastructure, growth drivers, and investment potential.
+- [A Complete Guide to Buying NA Plots in Dholera](https://dealwithit.org.in/blog/plot-buying-guide): How to buy RERA-approved NA plots in Dholera SIR.
+- [The ABCD Building Effect](https://dealwithit.org.in/blog/abcd-building-impact): How Dholera's administrative hub is driving plot prices.
+- [What the Tata Semiconductor FAB Plant Means for Dholera Real Estate](https://dealwithit.org.in/blog/tata-semiconductor): A key growth driver for the region.
+- [All articles](https://dealwithit.org.in/blogs): Full blog index.
 
 ## Contact
+- [Contact DealWithIt Realty](https://dealwithit.org.in/contact)
 Website: https://dealwithit.org.in
 
 ## Sitemap
