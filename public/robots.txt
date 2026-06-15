@@ -1,6 +1,40 @@
-User-agent: *
+# robots.txt for dealwithit.org.in
+# AI crawlers are explicitly welcome to read the site.
+# NOTE: robots.txt only governs well-behaved crawlers that choose to obey it.
+# It does NOT override Cloudflare edge blocking (e.g. "Block AI bots" /
+# Super Bot Fight Mode) — those must be configured in the Cloudflare zone.
+
+# --- AI / LLM crawlers (explicitly allowed) ---
+User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- All other crawlers ---
+User-agent: *
+Allow: /
 Disallow: /admin
 Disallow: /admin/
 Disallow: /login
