@@ -1,0 +1,17 @@
+# DealWithIt Realty
+
+> DealWithIt Realty is a real estate company specializing in RERA-approved residential and commercial plot investments in Dholera SIR (Special Investment Region), Gujarat, India.
+
+## Projects
+- [RSC Pride](https://dealwithit.org.in/rsc-pride): RERA-approved plot investment project in Dholera SIR.
+- [Aerox](https://dealwithit.org.in/aerox): RERA-approved plot investment project in Dholera SIR.
+- [Elanza](https://dealwithit.org.in/elanza): RERA-approved plot investment project in Dholera SIR.
+
+## Dholera SIR Investment Guide
+- [About Dholera SIR](https://dealwithit.org.in/dholera-sir): Overview of Dholera SIR infrastructure, growth drivers, and investment potential.
+
+## Contact
+Website: https://dealwithit.org.in
+
+## Sitemap
+https://dealwithit.org.in/sitemap.xml
