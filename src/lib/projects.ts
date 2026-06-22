@@ -126,7 +126,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
         inSchema: true,
       },
       { q: "What plot sizes are available?", a: "Plots range from 150–400 Sq.Yd." },
-      { q: "What is the current price per sq.yd.?", a: "[FILL IN: current pricing]" },
     ],
   },
   aerox: {
@@ -197,7 +196,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
         inSchema: true,
       },
       { q: "What plot sizes are available?", a: "Plots range from 144–430 Sq.Yd." },
-      { q: "What is the current price per sq.yd.?", a: "[FILL IN: current pricing]" },
     ],
   },
   regalia: {
