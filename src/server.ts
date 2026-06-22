@@ -86,6 +86,17 @@ export default {
         return Response.redirect(url.toString(), 301);
       }
 
+      // Permanent redirects for renamed URLs, so old inbound links and any
+      // search-index entries keep their equity instead of hitting a 404.
+      const LEGACY_REDIRECTS: Record<string, string> = {
+        "/blog/bholera-vs-other-smart-cities": "/blog/dholera-vs-other-smart-cities",
+      };
+      const legacyTarget = LEGACY_REDIRECTS[url.pathname];
+      if (legacyTarget) {
+        url.pathname = legacyTarget;
+        return Response.redirect(url.toString(), 301);
+      }
+
       // Dynamic sitemap: generated from the live `blogs` table so newly
       // published posts appear without a redeploy. Served here (not via a
       // file route) because this TanStack Start version has no server-route
