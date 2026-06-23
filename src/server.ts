@@ -93,6 +93,10 @@ export default {
       // search-index entries keep their equity instead of hitting a 404.
       const LEGACY_REDIRECTS: Record<string, string> = {
         "/blog/bholera-vs-other-smart-cities": "/blog/dholera-vs-other-smart-cities",
+        // Malformed slugs corrected in the DB — keep old URLs alive.
+        "/blog/s-dholera-good-investment": "/blog/is-dholera-good-investment",
+        // Thin duplicate consolidated into the comprehensive guide.
+        "/blog/blogsafe-invest-dholera": "/blog/is-it-safe-to-invest-in-dholera",
       };
       const legacyTarget = LEGACY_REDIRECTS[url.pathname];
       if (legacyTarget) {

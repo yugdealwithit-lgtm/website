@@ -20,13 +20,14 @@ type UrlEntry = {
 };
 
 // Static routes that don't change without a redeploy. Project slugs come from
-// src/components/nav.tsx (pride, aerox, regalia, paradise).
+// src/lib/projects.ts (pride, aerox, regalia, elanza, paradise).
 const STATIC_ROUTES: UrlEntry[] = [
   { loc: "/", changefreq: "weekly", priority: "1.0" },
   { loc: "/projects", changefreq: "weekly", priority: "0.9" },
   { loc: "/projects/pride", changefreq: "monthly", priority: "0.8" },
   { loc: "/projects/aerox", changefreq: "monthly", priority: "0.8" },
   { loc: "/projects/regalia", changefreq: "monthly", priority: "0.8" },
+  { loc: "/projects/elanza", changefreq: "monthly", priority: "0.8" },
   { loc: "/projects/paradise", changefreq: "monthly", priority: "0.8" },
   { loc: "/blogs", changefreq: "daily", priority: "0.7" },
   { loc: "/contact", changefreq: "monthly", priority: "0.6" },

@@ -23,10 +23,10 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/blog/${params.slug}` },
+        { property: "og:url", content: `https://dealwithit.org.in/blog/${params.slug}` },
         ...(p?.cover_image_url ? [{ property: "og:image", content: p.cover_image_url }] : []),
       ],
-      links: [{ rel: "canonical", href: `/blog/${params.slug}` }],
+      links: [{ rel: "canonical", href: `https://dealwithit.org.in/blog/${params.slug}` }],
     };
   },
   notFoundComponent: () => (
@@ -44,8 +44,27 @@ export const Route = createFileRoute("/blog/$slug")({
 function BlogPostPage() {
   const { post } = Route.useLoaderData();
   const date = post.published_at ? new Date(post.published_at).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }) : "";
+  const blogLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.meta_title || post.title,
+    description: post.meta_description || post.excerpt || "",
+    ...(post.published_at ? { datePublished: post.published_at } : {}),
+    ...(post.updated_at || post.published_at ? { dateModified: post.updated_at || post.published_at } : {}),
+    ...(post.cover_image_url ? { image: post.cover_image_url } : {}),
+    url: `https://dealwithit.org.in/blog/${post.slug}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `https://dealwithit.org.in/blog/${post.slug}` },
+    author: { "@type": "Organization", name: "DealWithIt Realty", url: "https://dealwithit.org.in/" },
+    publisher: {
+      "@type": "Organization",
+      name: "DealWithIt Realty",
+      url: "https://dealwithit.org.in/",
+      logo: { "@type": "ImageObject", url: "https://dealwithit.org.in/logo.jpg" },
+    },
+  };
   return (
     <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#f5f0e0", fontFamily: "system-ui, sans-serif" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogLd) }} />
       <header style={{ borderBottom: "1px solid #2a2a2a", padding: "18px 28px" }}>
         <Link to="/" style={{ color: "#c9a84c", fontSize: 11, letterSpacing: 2, textDecoration: "none" }}>← DEALWITHIT</Link>
       </header>

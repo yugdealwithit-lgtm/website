@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { C, PHONE, PHONE_DISPLAY, waMsg } from "@/lib/site";
+import { C, MAPS, PHONE, PHONE_DISPLAY, waMsg, type MapKey } from "@/lib/site";
 import { PROJECTS, type Project, type ProjectId } from "@/lib/projects";
 import { SiteShell } from "@/components/site-shell";
 import { WaIcon } from "@/components/icons";
@@ -301,18 +301,31 @@ function ProjectDetail({ proj }: { proj: Project }) {
 
 function ProjectDetailRoute() {
   const { proj } = Route.useLoaderData();
+  const geo = MAPS[proj.id as MapKey];
   const ld = {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
-    name: proj.schemaName ?? `RSC ${proj.name} — ${proj.cat}`,
+    name: proj.schemaName ?? `${proj.name} — ${proj.cat}, Dholera SIR`,
     description: proj.schemaDescription ?? proj.about,
     url: `https://dealwithit.org.in/projects/${proj.id}`,
+    ...(geo ? { geo: { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng } } : {}),
+    address: { "@type": "PostalAddress", addressLocality: proj.loc, addressRegion: "Gujarat", addressCountry: "IN" },
+    areaServed: { "@type": "Place", name: "Dholera SIR, Gujarat, India" },
+    // DealWithIt Realty is the listing realtor — a distinct entity from the
+    // developer (RSC Group). This anchors the brand for AI engines.
     broker: {
       "@type": "RealEstateAgent",
       name: "DealWithIt Realty",
       url: "https://dealwithit.org.in/",
+      areaServed: "Dholera SIR, Gujarat, India",
+      sameAs: ["https://instagram.com/dealwithit.realty"],
     },
-    address: { "@type": "PostalAddress", addressLocality: "Dholera", addressRegion: "Gujarat", addressCountry: "IN" },
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Approval", value: "RERA-approved" },
+      { "@type": "PropertyValue", name: "Land Status", value: "NA / NOC, 100% Title Clear" },
+      { "@type": "PropertyValue", name: "Plot Sizes", value: proj.sizes },
+      { "@type": "PropertyValue", name: "Inventory", value: proj.plots },
+    ],
   };
   const schemaFaqs = proj.faqs?.filter((f) => f.inSchema) ?? [];
   const faqLd =

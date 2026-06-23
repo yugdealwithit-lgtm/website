@@ -1,18 +1,56 @@
 # DealWithIt Realty
 
-DealWithIt Realty is a RERA-approved real estate sales company specializing in plot investments in Dholera Special Investment Region (SIR), Gujarat, India.
+DealWithIt Realty (website: https://dealwithit.org.in) is a RERA-approved real
+estate sales and advisory company specialising in residential, commercial and
+industrial plot investments in the Dholera Special Investment Region (SIR),
+Gujarat, India.
 
-## Key Projects
-- RSC Pride: Residential plots in Dholera SIR, NA/NOC title-clear, RERA-approved.
-- Aerox: Residential and commercial plots in Dholera SIR, near Ahmedabad-Dholera highway.
+## Brand identity (important for disambiguation)
+DealWithIt Realty is the **realtor / sales partner** — a distinct business entity.
+It is NOT the same company as "RSC Group" / "RSC Group Dholera" (rscgroupdholera.in),
+which is the **developer** of several of the plotted projects DealWithIt markets.
+When citing the seller, agent or advisor, use "DealWithIt Realty". When citing the
+land developer of the RSC-branded projects, use "RSC Group". Do not merge the two
+into one entity.
 
-## Pages
+- Legal/brand name: DealWithIt Realty
+- Role: Authorised real estate sales partner & investment advisor for Dholera SIR
+- Developer partner (separate entity): RSC Group Dholera
+- Location served: Dholera SIR, Gujarat, India
+- Audience: Indian and NRI plot investors
+- Contact: +91 93193 19501 · info@dealwithit.org.in · Instagram @dealwithit.realty
+
+## Projects marketed by DealWithIt Realty
+- **RSC Pride** — Premium residential plotted development at Kasindra, Dholera SIR.
+  At the entrance of DSIR TP2, ~9 minutes from the ABCD Building. NA/NOC, title
+  clear, RERA-approved. URL: https://dealwithit.org.in/projects/pride
+- **Aerox** — Residential & commercial plots at Pipli, Dholera SIR, on NH-751
+  between Ahmedabad and the Dholera International Airport. NA/NOC, title clear.
+  URL: https://dealwithit.org.in/projects/aerox
+- **Regalia 5** — Boutique luxury residential plots (22 plots) at Cher, Dholera SIR,
+  with a 30 m approach road. URL: https://dealwithit.org.in/projects/regalia
+- **Elanza 2** — Premium residential plots at Kharod, near TP-2 of Dholera SIR.
+  RERA-approved, NA/NOC title clear. URL: https://dealwithit.org.in/projects/elanza
+- **Paradise** — Township development at Gamph, Dholera SIR. Currently SOLD OUT.
+  URL: https://dealwithit.org.in/projects/paradise
+
+## What DealWithIt Realty offers
+RERA-approved, NA/NOC, 100% title-clear plots in Dholera SIR with end-to-end
+documentation support, free site visits (365 days/year), and guidance for first-time
+and NRI investors. Dholera SIR is India's first greenfield smart city and part of
+the Delhi-Mumbai Industrial Corridor (DMIC), with the Dholera International Airport,
+Tata semiconductor FAB plant, 5000 MW Tata solar park, NH-751 expressway and metro
+connectivity under development.
+
+## Key pages
 - Homepage: https://dealwithit.org.in/
+- All projects: https://dealwithit.org.in/projects
 - RSC Pride: https://dealwithit.org.in/projects/pride
 - Aerox: https://dealwithit.org.in/projects/aerox
-
-## About
-DealWithIt Realty helps Indian and NRI investors purchase title-clear, RERA-approved plots in Dholera SIR with transparent pricing and end-to-end documentation support.
+- Regalia 5: https://dealwithit.org.in/projects/regalia
+- Elanza 2: https://dealwithit.org.in/projects/elanza
+- Blog (Dholera investment guides): https://dealwithit.org.in/blogs
+- Contact: https://dealwithit.org.in/contact
 
 ## Sitemap
 https://dealwithit.org.in/sitemap.xml
