@@ -123,7 +123,7 @@ function ContactPage() {
                   {c.kind === "wa" ? <WaIcon size={17} /> : c.kind === "insta" ? <InstaIcon size={15} /> : c.kind === "phone" ? "📞" : "✉️"}
                 </div>
                 <div>
-                  <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 3, textTransform: "uppercase" }}>{c.t}</div>
+                  <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 3, textTransform: "uppercase" }}>{c.t}</div>
                   <div style={{ fontSize: 13 }}>{c.v}</div>
                 </div>
                 <div style={{ marginLeft: "auto", color: C.muted, fontSize: 14 }}>→</div>
@@ -171,31 +171,32 @@ function ContactPage() {
                 <div className="sl" style={{ marginBottom: 20 }}>Enquiry Form</div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
                   <div>
-                    <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>FULL NAME *</div>
+                    <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>FULL NAME *</div>
                     <input name="name" value={form.name} onChange={handle} placeholder="Your name" />
                   </div>
                   <div>
-                    <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>PHONE *</div>
+                    <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>PHONE *</div>
                     <input name="phone" value={form.phone} onChange={handle} placeholder="+91 XXXXX XXXXX" type="tel" />
                   </div>
                 </div>
                 <div style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>EMAIL</div>
+                  <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>EMAIL</div>
                   <input name="email" value={form.email} onChange={handle} placeholder="your@email.com" type="email" />
                 </div>
                 <div style={{ marginBottom: 12 }}>
-                  <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>INTERESTED PROJECT</div>
+                  <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>INTERESTED PROJECT</div>
                   <select name="project" value={form.project} onChange={handle}>
                     <option value="">Select a project</option>
                     <option>Pride (Kasindra, Dholera)</option>
                     <option>Aerox (Pipli, Dholera)</option>
-                    <option>Regalia 3 (Cher, Dholera)</option>
-                    <option>Paradise (Gamph, Dholera)</option>
+                    <option>Regalia 5 (Cher, Dholera)</option>
+                    <option>Elanza 2 (Dholera SIR)</option>
+                    <option>Paradise (Gamph, Dholera) — Sold Out</option>
                     <option>Other / General Inquiry</option>
                   </select>
                 </div>
                 <div style={{ marginBottom: 22 }}>
-                  <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>MESSAGE</div>
+                  <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 6 }}>MESSAGE</div>
                   <textarea name="message" value={form.message} onChange={handle} rows={4} placeholder="Tell us about your investment goals..." style={{ resize: "vertical" }} />
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
@@ -237,7 +238,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact DealWithIt | Book a Free Site Visit in Dholera" },
-      { name: "description", content: "Get in touch with DealWithIt Real Estate. Call, WhatsApp or fill the form to book a free site visit to Dholera SIR — Pride, Aerox, Regalia 3 or Paradise." },
+      { name: "description", content: "Get in touch with DealWithIt Real Estate. Call, WhatsApp or fill the form to book a free site visit to Dholera SIR — Pride, Aerox, Regalia 5 or Elanza 2." },
       { name: "keywords", content: "contact dealwithit, book site visit dholera, dholera real estate enquiry, rsc group contact, dholera plot enquiry" },
       { property: "og:title", content: "Contact DealWithIt | Book a Free Site Visit in Dholera" },
       { property: "og:description", content: "Call, WhatsApp or fill the form to book a free site visit to Dholera SIR projects." },

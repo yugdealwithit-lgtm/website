@@ -14,8 +14,8 @@ const LINKS: NavItem[] = [
   { label: "Projects", to: "/projects" },
   { label: "Pride", to: "/projects/$id", params: { id: "pride" } },
   { label: "Aerox", to: "/projects/$id", params: { id: "aerox" } },
-  { label: "Regalia 3", to: "/projects/$id", params: { id: "regalia" } },
-  { label: "Paradise", to: "/projects/$id", params: { id: "paradise" } },
+  { label: "Regalia 5", to: "/projects/$id", params: { id: "regalia" } },
+  { label: "Elanza 2", to: "/projects/$id", params: { id: "elanza" } },
   { label: "Blogs", to: "/blogs" },
   { label: "Contact", to: "/contact" },
 ];

@@ -11,13 +11,21 @@ type Tab = (typeof TABS)[number];
 
 const tabLabel = (t: Tab) => (t === "inventory" ? "📊 Inventory" : t.charAt(0).toUpperCase() + t.slice(1));
 
+/** Downloadable brochures (only projects with a web-sized PDF). */
+const BROCHURES: Partial<Record<ProjectId, string>> = {
+  pride: "/brochures/pride-brochure.pdf",
+  aerox: "/brochures/aerox-brochure.pdf",
+  regalia: "/brochures/regalia-brochure.pdf",
+  elanza: "/brochures/elanza-brochure.pdf",
+};
+
 /** Sticky booking / enquiry sidebar. */
 const BookingCard = ({ proj }: { proj: Project }) => (
   <aside style={{ position: "sticky", top: 96 }}>
     <div style={{ background: C.card, border: `1px solid ${C.border}`, borderTop: `3px solid ${proj.color}`, padding: 28, borderRadius: 2 }}>
-      <div className="sl" style={{ marginBottom: 6 }}>Book a Site Visit</div>
+      <div className="sl" style={{ marginBottom: 6 }}>{proj.status === "Sold Out" ? "Project Sold Out" : "Book a Site Visit"}</div>
       <h3 className="serif" style={{ fontSize: 26, fontWeight: 400, marginBottom: 6 }}>{proj.name}</h3>
-      <div style={{ fontSize: 11, color: C.gold, letterSpacing: 1, marginBottom: 18 }}>📍 {proj.loc}</div>
+      <div style={{ fontSize: 12, color: C.goldL, letterSpacing: 1, marginBottom: 18, display: "flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: C.gold, display: "inline-block" }} />{proj.loc}</div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, background: C.border, border: `1px solid ${C.border}`, marginBottom: 18 }}>
         {[
@@ -27,19 +35,24 @@ const BookingCard = ({ proj }: { proj: Project }) => (
           ["Category", proj.cat.split(" ")[0]],
         ].map(([l, v]) => (
           <div key={l} style={{ background: C.card, padding: "12px 14px" }}>
-            <div style={{ fontSize: 8, color: C.muted, letterSpacing: 1.5, marginBottom: 4, textTransform: "uppercase" }}>{l}</div>
+            <div style={{ fontSize: 11, color: C.muted, letterSpacing: 1.2, marginBottom: 4, textTransform: "uppercase" }}>{l}</div>
             <div style={{ fontSize: 13, fontWeight: 500 }}>{v}</div>
           </div>
         ))}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <a href={waMsg(`Hi! I'm interested in ${proj.name} project. Please share details & pricing.`)} target="_blank" rel="noreferrer">
+        <a href={waMsg(`Hi! I'm interested in the ${proj.name} project. Please share details & availability.`)} target="_blank" rel="noreferrer">
           <button className="btn-wa" style={{ width: "100%" }}><WaIcon size={15} />WhatsApp Enquiry</button>
         </a>
         <a href={`tel:+${PHONE}`}>
           <button className="btn-gold" style={{ width: "100%" }}>📞 {PHONE_DISPLAY}</button>
         </a>
+        {BROCHURES[proj.id] && (
+          <a href={BROCHURES[proj.id]} download target="_blank" rel="noreferrer">
+            <button className="btn-out" style={{ width: "100%" }}>⬇ Download Brochure</button>
+          </a>
+        )}
         <Link to="/contact" className="btn-out" style={{ width: "100%" }}>Send a Message</Link>
       </div>
       <p style={{ fontSize: 10, color: C.muted, marginTop: 14, textAlign: "center", lineHeight: 1.6 }}>
@@ -77,7 +90,7 @@ function ProjectDetail({ proj }: { proj: Project }) {
             <span style={{ color: C.muted }}>›</span>
             <span style={{ fontSize: 10, color, letterSpacing: 1 }}>{name}</span>
           </div>
-          <div style={{ fontSize: 9, letterSpacing: 2, color, border: `1px solid ${color}44`, display: "inline-block", padding: "4px 11px", marginBottom: 16, textTransform: "uppercase" }}>{cat}</div>
+          <div style={{ fontSize: 11, letterSpacing: 2, color, border: `1px solid ${color}44`, display: "inline-block", padding: "4px 11px", marginBottom: 16, textTransform: "uppercase" }}>{cat}</div>
           <h1 className="serif" style={{ fontWeight: 300, lineHeight: 0.95, marginBottom: 14, fontSize: "clamp(48px,9vw,104px)" }}>{name}</h1>
           <p className="serif" style={{ fontSize: "clamp(18px,2.4vw,26px)", color: C.muted, fontStyle: "italic", marginBottom: 26 }}>{tagline}</p>
           <div style={{ display: "flex", gap: 30, marginBottom: 28, flexWrap: "wrap" }}>
@@ -88,7 +101,7 @@ function ProjectDetail({ proj }: { proj: Project }) {
               { l: "Status", v: status },
             ].map((s) => (
               <div key={s.l}>
-                <div style={{ fontSize: 9, color: C.muted, letterSpacing: 2, marginBottom: 3, textTransform: "uppercase" }}>{s.l}</div>
+                <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 3, textTransform: "uppercase" }}>{s.l}</div>
                 <div style={{ fontSize: 13, fontWeight: 500 }}>{s.v}</div>
               </div>
             ))}

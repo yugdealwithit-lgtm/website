@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 
-// ── Brand colour palette (dark luxury)
+// ── Brand colour palette (elevated black & gold — warm, luminous)
 export const C = {
-  black: "#0a0a0a",
-  dark: "#111111",
-  card: "#161616",
-  cardHi: "#1c1c1c",
-  gold: "#9a7b2e",
-  goldL: "#c9a84c",
-  goldB: "#e8c55a",
-  white: "#f5f3ee",
-  muted: "#888880",
-  border: "#2a2a2a",
+  black: "#100c06",   // warm near-black base (lifted off pure black)
+  dark: "#17110a",    // raised surface
+  card: "#1d1610",    // warm card
+  cardHi: "#241c12",  // card hover
+  gold: "#c9a84c",    // primary gold (brighter than the old muddy #9a7b2e)
+  goldL: "#f0d479",   // highlight gold
+  goldB: "#f7e4a0",   // brightest gold (shimmer peak)
+  goldD: "#9a7b2e",   // deep gold (fills / pressed states)
+  white: "#f6f1e6",   // warm cream text
+  muted: "#b09f86",   // warm muted text (brighter & warmer than old #888880)
+  mutedD: "#7d6f5a",  // dim muted (de-emphasised labels)
+  border: "#3a2f1e",  // warm gold-tinted hairline
 } as const;
 
 // ── Contact details
@@ -33,7 +35,8 @@ export const VIRTUAL_TOUR_URL =
 export const MAPS = {
   pride: { lat: 22.4168, lng: 72.1045, zoom: 16, label: "RSC Pride — Kasindra, Dholera" },
   aerox: { lat: 22.414795, lng: 72.287033, zoom: 16, label: "Aerox — Pipli, Dholera" },
-  regalia: { lat: 22.385, lng: 72.18, zoom: 16, label: "Regalia 3 — Cher, Dholera" },
+  regalia: { lat: 22.385, lng: 72.18, zoom: 16, label: "Regalia 5 — Cher, Dholera" },
+  elanza: { lat: 22.4, lng: 72.2, zoom: 14, label: "Elanza 2 — Dholera SIR" },
   paradise: { lat: 22.395, lng: 72.078, zoom: 15, label: "Paradise — Gamph, Dholera" },
 } as const;
 

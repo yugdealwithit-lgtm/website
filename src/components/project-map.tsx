@@ -31,11 +31,11 @@ export const MapEmbed = ({ project }: { project: MapKey }) => {
           justifyContent: "space-between",
         }}
       >
-        <span style={{ fontSize: 11, color: C.goldL, letterSpacing: 1 }}>📍 {m.label}</span>
+        <span style={{ fontSize: 12, color: C.goldL, letterSpacing: 1, display: "inline-flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: C.gold, display: "inline-block" }} />{m.label}</span>
         <span
           style={{
-            fontSize: 8,
-            letterSpacing: 2,
+            fontSize: 11,
+            letterSpacing: 1.5,
             color: C.muted,
             border: `1px solid ${C.border}`,
             padding: "3px 8px",
@@ -128,7 +128,7 @@ export const InventoryMap = ({ src, alt }: { src: string; alt: string }) => {
             right: 10,
             background: `${C.black}cc`,
             padding: "5px 10px",
-            fontSize: 9,
+            fontSize: 11,
             letterSpacing: 1.5,
             color: C.goldL,
             border: `1px solid ${C.border}`,

@@ -65,22 +65,10 @@ function StatCounter({ n, suffix, l }: Stat) {
         {val}
         {tail}
       </div>
-      <div style={{ fontSize: 9, color: C.muted, letterSpacing: 1.5, marginTop: 4, textTransform: "uppercase" }}>{l}</div>
+      <div style={{ fontSize: 11, color: C.muted, letterSpacing: 1.2, marginTop: 6, textTransform: "uppercase" }}>{l}</div>
     </div>
   );
 }
-
-/** Mouse-tracking 3D tilt handlers shared by project cards. */
-const onTiltMove = (e: React.MouseEvent<HTMLElement>) => {
-  const r = e.currentTarget.getBoundingClientRect();
-  const x = ((e.clientX - r.left) / r.width - 0.5) * 12;
-  const y = ((e.clientY - r.top) / r.height - 0.5) * -12;
-  e.currentTarget.style.transform = `perspective(700px) rotateY(${x}deg) rotateX(${y}deg) scale(1.03)`;
-};
-const onTiltLeave = (e: React.MouseEvent<HTMLElement>) => {
-  e.currentTarget.style.transform = "";
-  e.currentTarget.style.transition = "transform 0.6s cubic-bezier(.2,.7,.2,1)";
-};
 
 const TICKER = [
   "RSC Group Dholera",
@@ -147,17 +135,9 @@ function HomePage() {
           alignItems: "center",
           overflow: "hidden",
           padding: "120px clamp(18px,5vw,40px) 60px",
-          background: `radial-gradient(ellipse at 18% 40%,rgba(154,123,46,.12) 0%,transparent 55%),radial-gradient(ellipse at 90% 80%,rgba(201,168,76,.06) 0%,transparent 50%),${C.black}`,
+          background: `radial-gradient(ellipse 70% 60% at 72% 32%,rgba(201,168,76,.16) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 8% 88%,rgba(240,212,121,.07) 0%,transparent 55%),${C.black}`,
         }}
       >
-        {/* Animated dot-grid + scan line */}
-        <div className="hero-dot-grid" />
-        <div className="scan-line" />
-
-        {/* Decorative diagonal lines */}
-        <div style={{ position: "absolute", top: 0, right: "26%", width: 1, height: "100%", background: `linear-gradient(to bottom,transparent,${C.gold}33,transparent)` }} />
-        <div style={{ position: "absolute", top: 0, right: "12%", width: 1, height: "100%", background: `linear-gradient(to bottom,transparent,${C.gold}1a,transparent)` }} />
-
         <div style={{ maxWidth: 1280, margin: "0 auto", width: "100%", display: "grid", gridTemplateColumns: "1fr", gap: 48 }} className="hero-grid">
           <div className="reveal" style={{ maxWidth: 620 }}>
             <div className="sl" style={{ marginBottom: 18 }}>Dholera Smart City — India's Future</div>
@@ -189,28 +169,27 @@ function HomePage() {
             </div>
           </div>
 
-          {/* 2x2 project card grid — desktop only */}
+          {/* 2x2 project card grid — desktop only (4 active projects; sold-out excluded) */}
           <div
             className="hide-mob"
             style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 12, alignSelf: "center" }}
           >
-            {PROJECT_SUMMARIES.map((p, i) => (
+            {PROJECT_SUMMARIES.filter((p) => !p.soldOut).slice(0, 4).map((p, i) => (
               <Link
                 key={p.id}
                 to="/projects/$id"
                 params={{ id: p.id }}
-                className="reveal"
-                onMouseMove={onTiltMove}
-                onMouseLeave={onTiltLeave}
-                style={{ position: "relative", overflow: "hidden", border: `1px solid ${C.border}`, borderRadius: 2, display: "block", animationDelay: `${0.1 * i + 0.2}s`, transition: "transform 0.15s ease" }}
+                className="reveal mini-card"
+                style={{ position: "relative", overflow: "hidden", border: `1px solid ${C.border}`, borderRadius: 4, display: "block", animationDelay: `${0.1 * i + 0.2}s` }}
               >
                 <img src={p.img} alt={p.name} style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}f2 0%,transparent 55%)` }} />
+                {/* Glowing corner accent (replaces the side-stripe border) */}
+                <div style={{ position: "absolute", top: 0, right: 0, width: 48, height: 48, background: `radial-gradient(circle at top right, ${p.color}40, transparent 70%)`, pointerEvents: "none" }} />
                 <div style={{ position: "absolute", bottom: 0, padding: 14 }}>
-                  <div className="serif" style={{ fontSize: 19, fontWeight: 500 }}>{p.name}</div>
-                  <div style={{ fontSize: 9, color: p.color, letterSpacing: 1.4, marginTop: 2 }}>{p.loc}</div>
+                  <div className="serif" style={{ fontSize: 20, fontWeight: 500 }}>{p.name}</div>
+                  <div style={{ fontSize: 11, color: p.color, letterSpacing: 1.2, marginTop: 3 }}>{p.loc}</div>
                 </div>
-                <div style={{ position: "absolute", top: 0, left: 0, width: 3, height: "100%", background: p.color }} />
               </Link>
             ))}
           </div>
@@ -223,7 +202,7 @@ function HomePage() {
           {[...TICKER, ...TICKER].map((t, i) => (
             <span key={i} className="ticker-item">
               <span className="ticker-dot" />
-              <span style={{ fontSize: 11, color: C.muted, letterSpacing: 1.5, whiteSpace: "nowrap", textTransform: "uppercase" }}>{t}</span>
+              <span style={{ fontSize: 12, color: C.muted, letterSpacing: 1.3, whiteSpace: "nowrap", textTransform: "uppercase" }}>{t}</span>
             </span>
           ))}
         </div>
@@ -312,23 +291,24 @@ function HomePage() {
               to="/projects/$id"
               params={{ id: p.id }}
               className="proj-card"
-              onMouseMove={onTiltMove}
-              onMouseLeave={onTiltLeave}
-              style={{ position: "relative", background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "block", borderRadius: 2, borderLeft: `3px solid ${p.color}`, transition: "transform 0.15s ease" }}
+              style={{ position: "relative", background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "block", borderRadius: 4 }}
             >
-              {/* Glowing corner accent */}
-              <div style={{ position: "absolute", top: 0, right: 0, width: 60, height: 60, background: `radial-gradient(circle at top right, ${p.color}33, transparent 70%)`, pointerEvents: "none", zIndex: 1 }} />
+              {/* Glowing corner accent (carries the project colour without a side-stripe) */}
+              <div style={{ position: "absolute", top: 0, right: 0, width: 72, height: 72, background: `radial-gradient(circle at top right, ${p.color}3d, transparent 70%)`, pointerEvents: "none", zIndex: 1 }} />
               <div className="proj-card-img" style={{ position: "relative", height: 260 }}>
-                <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <img src={p.img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover", filter: p.soldOut ? "grayscale(.65) brightness(.7)" : undefined }} />
                 <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}dd 0%,transparent 60%)` }} />
-                <div style={{ position: "absolute", top: 14, left: 14, fontSize: 9, letterSpacing: 1.5, color: p.color, border: `1px solid ${p.color}`, padding: "4px 10px", background: `${C.black}99`, textTransform: "uppercase" }}>{p.sub}</div>
+                <div style={{ position: "absolute", top: 14, left: 14, fontSize: 10.5, letterSpacing: 1.3, color: p.color, border: `1px solid ${p.color}`, padding: "5px 11px", background: `${C.black}99`, textTransform: "uppercase", borderRadius: 3 }}>{p.sub}</div>
+                {p.soldOut && (
+                  <div style={{ position: "absolute", top: 14, right: 14, zIndex: 2, fontSize: 10.5, fontWeight: 600, letterSpacing: 1.6, color: C.white, border: `1px solid ${C.white}88`, padding: "5px 11px", background: `${C.black}cc`, textTransform: "uppercase", borderRadius: 3 }}>Sold Out</div>
+                )}
               </div>
               <div style={{ padding: 26 }}>
                 <h3 className="serif" style={{ fontSize: 28, fontWeight: 400, marginBottom: 6 }}>{p.name}</h3>
-                <div style={{ fontSize: 10, color: C.gold, letterSpacing: 1.5, marginBottom: 10 }}>📍 {p.loc}</div>
-                <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.75, marginBottom: 16 }}>{p.desc}</p>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, color: p.color, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
-                  <span>Explore</span>
+                <div style={{ fontSize: 11, color: C.goldL, letterSpacing: 1.3, marginBottom: 10, display: "flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: p.color, display: "inline-block" }} />{p.loc}</div>
+                <p style={{ fontSize: 13.5, color: C.muted, lineHeight: 1.75, marginBottom: 16 }}>{p.desc}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, color: p.soldOut ? C.muted : p.color, fontSize: 11, letterSpacing: 1.8, textTransform: "uppercase" }}>
+                  <span>{p.soldOut ? "View Details" : "Explore"}</span>
                   <span>→</span>
                 </div>
               </div>
@@ -430,10 +410,10 @@ const FAQ_LD = {
     },
     {
       "@type": "Question",
-      name: "What is the price of plots in Dholera?",
+      name: "How can I get pricing for Dholera plots?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Plot prices in Dholera SIR vary by project and location. RSC Pride (Kasindra) starts from competitive rates with preferred plot premiums of ₹250/sq.yd. RSC Aerox (Pipli) and Regalia 3 (Cher) have premiums from ₹500/sq.yd. Contact us for the latest pricing and available inventory.",
+        text: "Plot pricing in Dholera SIR depends on the project, plot size and exact location. For the latest availability and a current quote across RSC Pride, Aerox, Regalia 5 and Elanza 2, contact DealWithIt on WhatsApp at +91 93193 19501 or book a free site visit.",
       },
     },
     {
@@ -449,7 +429,7 @@ const FAQ_LD = {
       name: "Are the plots in Dholera NA and NOC certified?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. All RSC Group Dholera plots — Pride, Aerox, Regalia 3, and Paradise — are NA (Non-Agricultural), NOC certified, and 100% title clear with Plan Pass approval. This makes them legally safe for investment and construction.",
+        text: "Yes. All RSC Group Dholera plots — Pride, Aerox, Regalia 5, Elanza 2, and Paradise — are NA (Non-Agricultural), NOC certified, and 100% title clear with Plan Pass approval. This makes them legally safe for investment and construction.",
       },
     },
     {
@@ -473,7 +453,7 @@ const FAQ_LD = {
       name: "What plot sizes are available in Dholera?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "RSC Group Dholera offers plots across multiple projects: RSC Pride has 400+ plots of 150–400 sq.yd in Kasindra; Aerox has 350+ plots of 144–430 sq.yd in Pipli; Regalia 3 has 22 exclusive plots of 444.76 sq.yd in Cher; Paradise has 200+ plots of 150–500 sq.yd in Gamph, Dholera.",
+        text: "RSC Group Dholera offers plots across multiple projects: RSC Pride has 400+ plots of 150–400 sq.yd in Kasindra; Aerox has 350+ plots of 144–430 sq.yd in Pipli; Regalia 5 has 22 exclusive plots of 444.76 sq.yd in Cher; plus the newly launched Elanza 2 in Dholera SIR.",
       },
     },
     {
@@ -501,13 +481,13 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { name: "description", content: "DealWithIt Realty offers RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing, and end-to-end investment support." },
+      { name: "description", content: "DealWithIt Realty offers RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process, and end-to-end investment support." },
       { name: "keywords", content: "dholera plots, dholera smart city, residential plots dholera, dholera sir investment, rsc pride dholera, aerox dholera, buy plot dholera, dealwithit realty" },
       { property: "og:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { property: "og:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing, and end-to-end investment support." },
+      { property: "og:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process, and end-to-end investment support." },
       { property: "og:url", content: "https://dealwithit.org.in/" },
       { name: "twitter:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { name: "twitter:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent pricing." },
+      { name: "twitter:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process." },
     ],
     links: [
       { rel: "canonical", href: "https://dealwithit.org.in/" },

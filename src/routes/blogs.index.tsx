@@ -91,7 +91,7 @@ function BlogsPage() {
                   <img src={b.cover_image_url || IMGS.paradise_cover} alt={b.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}aa 0%,transparent 60%)` }} />
                   {b.category && (
-                    <div style={{ position: "absolute", top: 12, left: 12, background: `${C.gold}22`, border: `1px solid ${C.gold}55`, padding: "4px 10px", fontSize: 9, letterSpacing: 1.5, color: C.goldL }}>{b.category}</div>
+                    <div style={{ position: "absolute", top: 12, left: 12, background: `${C.gold}22`, border: `1px solid ${C.gold}55`, padding: "4px 10px", fontSize: 11, letterSpacing: 1.5, color: C.goldL }}>{b.category}</div>
                   )}
                 </div>
                 <div style={{ padding: "22px 24px 26px", display: "flex", flexDirection: "column", flex: 1 }}>
@@ -125,7 +125,7 @@ function BlogsPage() {
             Talk to a Dholera <em className="gold-text">specialist</em>
           </h2>
           <p style={{ fontSize: 13, color: C.muted, marginBottom: 24, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
-            Get a personalised site visit, plot availability and pricing for Pride, Aerox, Regalia 3 and Paradise.
+            Get a personalised site visit and plot availability for Pride, Aerox, Regalia 5 and Elanza 2.
           </p>
           <Link to="/contact" className="btn-gold">Enquire Now</Link>
         </div>

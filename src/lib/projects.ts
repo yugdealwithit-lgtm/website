@@ -42,7 +42,7 @@ export interface Project {
   faqs?: { q: string; a: string; inSchema?: boolean }[];
 }
 
-export type ProjectId = "pride" | "aerox" | "regalia" | "paradise";
+export type ProjectId = "pride" | "aerox" | "regalia" | "elanza" | "paradise";
 
 /** A lighter summary used by listing / card views. */
 export interface ProjectSummary {
@@ -56,6 +56,8 @@ export interface ProjectSummary {
   color: string;
   img: string;
   desc: string;
+  /** When true, the project is fully booked — shown with a SOLD OUT treatment. */
+  soldOut?: boolean;
 }
 
 export const PROJECTS: Record<ProjectId, Project> = {
@@ -86,7 +88,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { label: "NA / NOC", value: "Certified" },
       { label: "Title Clear", value: "Yes" },
       { label: "Plan Pass", value: "Approved" },
-      { label: "Pref. Plot Premium", value: "₹250/Sq.Yd" },
     ],
     amenities: [
       { icon: "🛝", name: "Children Play Area" },
@@ -108,7 +109,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "💻", title: "Tata Semiconductor", desc: "India's first semiconductor FAB plant nearby" },
       { icon: "☀️", title: "Tata Solar Park", desc: "5000 MW world's largest solar park" },
     ],
-    seoTitle: "RSC Pride Dholera – Plot Prices, Sizes & Booking | DealWithIt Realty",
+    seoTitle: "RSC Pride Dholera – Plot Sizes & Booking | DealWithIt Realty",
     seoDescription:
       "Book RERA-approved residential plots in RSC Pride, Dholera SIR through DealWithIt Realty. NA/NOC title-clear plots, flexible payment plans, and full investment guidance.",
     schemaName: "RSC Pride - Dholera SIR",
@@ -154,7 +155,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { label: "Location", value: "Pipli, Ta: Dholera, Dist: Ahmedabad" },
       { label: "NA / NOC", value: "Registered & Certified" },
       { label: "Title Clear", value: "Yes" },
-      { label: "Pref. Plot Premium", value: "₹500/Sq.Yd" },
     ],
     amenities: [
       { icon: "🚪", name: "Entrance Gate" },
@@ -180,7 +180,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
     ],
     seoTitle: "Aerox Dholera SIR – Residential & Commercial Plots | DealWithIt Realty",
     seoDescription:
-      "Aerox in Dholera SIR offers title-clear residential and commercial plots near the Dholera-Ahmedabad highway. DealWithIt Realty helps you invest with confidence — pricing, sizes, and booking details inside.",
+      "Aerox in Dholera SIR offers title-clear residential and commercial plots near the Dholera-Ahmedabad highway. DealWithIt Realty helps you invest with confidence — sizes, locations, and booking details inside.",
     schemaName: "Aerox - Dholera SIR",
     schemaDescription:
       "RERA-approved residential and commercial plots in Aerox, Dholera Special Investment Region, near the Ahmedabad-Dholera highway. Offered through DealWithIt Realty.",
@@ -200,7 +200,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
   },
   regalia: {
     id: "regalia",
-    name: "Regalia 3",
+    name: "Regalia 5",
     tagline: "A Perfect Canvas for Your Dream Home",
     cat: "Luxury Residential Plots",
     loc: "Cher, Dholera",
@@ -208,7 +208,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
     imgs: [IMGS.regalia_gateway, IMGS.regalia_cover, IMGS.regalia_awards],
     bookingImg: IMGS.regalia_booking,
     about:
-      "Regalia 3 is an exclusive luxury residential plotting scheme at Cher village, Dholera. With just 22 thoughtfully planned plots of 444.76 sq. yards each, this boutique development offers unrivalled exclusivity. Located in Residential Zone (FP 382, TP 3C1) with a 30 MTR wide approach road.",
+      "Regalia 5 is an exclusive luxury residential plotting scheme at Cher village, Dholera. With just 22 thoughtfully planned plots of 444.76 sq. yards each, this boutique development offers unrivalled exclusivity. Located in Residential Zone (FP 382, TP 3C1) with a 30 MTR wide approach road.",
     plots: "22 Plots",
     sizes: "444.76 Sq.Yd each",
     status: "Available",
@@ -227,7 +227,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { label: "Zone", value: "Residential Zone" },
       { label: "Village", value: "Cher, Dholera" },
       { label: "Road Width", value: "30 MTR" },
-      { label: "Pref. Plot Premium", value: "₹500/Sq.Yd" },
     ],
     amenities: [
       { icon: "🚪", name: "Entrance Gate" },
@@ -252,6 +251,60 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "✈️", title: "Dholera Airport", desc: "30 minutes away" },
     ],
   },
+  elanza: {
+    id: "elanza",
+    name: "Elanza 2",
+    tagline: "Designed for the City of Tomorrow",
+    cat: "Plotted Development",
+    loc: "Dholera",
+    color: "#5a86c4",
+    imgs: ["/projects/elanza.jpeg", "/projects/elanza.jpeg", "/projects/elanza.jpeg"],
+    bookingImg: "/projects/elanza.jpeg",
+    about:
+      "Elanza 2 is the latest plotted development by RSC Group Dholera in India's first greenfield smart city. Built to the same NA/NOC title-clear standard as RSC's portfolio, Elanza 2 offers strategically located plots within the Dholera SIR growth corridor. (Project details below are being finalised from the official brochure.)",
+    plots: "New Launch",
+    sizes: "Multiple Sizes",
+    status: "New Launch",
+    whyInvest: [
+      "Located within the Dholera SIR growth corridor",
+      "Part of the Delhi-Mumbai Industrial Corridor (DMIC)",
+      "Close to upcoming Dholera infrastructure projects",
+      "NA, NOC and Title Clear — RSC Group standard",
+      "Backed by RSC Group — 15+ Dholera projects delivered",
+    ],
+    surveyInfo: [
+      { label: "Location", value: "Dholera SIR" },
+      { label: "NA / NOC", value: "Certified" },
+      { label: "Title Clear", value: "Yes" },
+      { label: "Developer", value: "RSC Group Dholera" },
+    ],
+    amenities: [
+      { icon: "🚪", name: "Entrance Gate" },
+      { icon: "🏡", name: "Club House" },
+      { icon: "🛣️", name: "Internal Road" },
+      { icon: "🔒", name: "24x7 Security" },
+      { icon: "🌳", name: "Landscape Garden" },
+      { icon: "💡", name: "Street Light" },
+      { icon: "🚧", name: "Project Boundary" },
+      { icon: "💧", name: "Water Connection" },
+      { icon: "📷", name: "CCTV Surveillance" },
+      { icon: "⚡", name: "24x7 Electricity" },
+    ],
+    locationBenefits: [
+      { icon: "✈️", title: "Dholera Int'l Airport", desc: "Upcoming greenfield airport" },
+      { icon: "🛣️", title: "NH-751 Expressway", desc: "109 km six-lane expressway" },
+      { icon: "💻", title: "Tata Semiconductor", desc: "India's first semiconductor FAB plant" },
+      { icon: "☀️", title: "Tata Solar Park", desc: "5000 MW world's largest solar park" },
+      { icon: "🏢", title: "ABCD Building", desc: "Central admin of Dholera Smart City" },
+      { icon: "⚡", title: "Activation Area", desc: "Near the Dholera activation zone" },
+    ],
+    seoTitle: "Elanza 2 Dholera SIR – New Launch Plots | DealWithIt Realty",
+    seoDescription:
+      "Elanza 2 by RSC Group — a new plotted development in Dholera SIR. NA/NOC title-clear plots offered through DealWithIt Realty.",
+    schemaName: "Elanza 2 - Dholera SIR",
+    schemaDescription:
+      "New plotted development in Elanza 2, Dholera Special Investment Region, Gujarat. NA/NOC title-clear plots offered through DealWithIt Realty.",
+  },
   paradise: {
     id: "paradise",
     name: "Paradise",
@@ -262,10 +315,10 @@ export const PROJECTS: Record<ProjectId, Project> = {
     imgs: [IMGS.paradise_cover, IMGS.paradise_dholera, IMGS.paradise_mega],
     bookingImg: IMGS.paradise_booking,
     about:
-      "Paradise by RSC Group Dholera is a landmark township development at Gamph village, Dholera. Situated along the Ahmedabad-Dholera Expressway corridor, Paradise is designed to provide exceptional quality of life with premium amenities, wide internal roads, and a master-planned layout.",
+      "Paradise by RSC Group Dholera is a landmark township development at Gamph village, Dholera. Situated along the Ahmedabad-Dholera Expressway corridor, Paradise is designed to provide exceptional quality of life with premium amenities, wide internal roads, and a master-planned layout. This project is now fully booked.",
     plots: "200+ Plots",
     sizes: "150–500 Sq.Yd",
-    status: "Available",
+    status: "Sold Out",
     whyInvest: [
       "Prime location along Ahmedabad-Dholera Expressway",
       "Close proximity to Dholera Activation Area",
@@ -278,7 +331,6 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { label: "NA / NOC", value: "Certified" },
       { label: "Title Clear", value: "Yes" },
       { label: "Developer", value: "RSC Group Dholera" },
-      { label: "Pref. Plot Premium", value: "₹250/Sq.Yd" },
     ],
     amenities: [
       { icon: "🚪", name: "Grand Entrance" },
@@ -333,7 +385,7 @@ export const PROJECT_SUMMARIES: ProjectSummary[] = [
   },
   {
     id: "regalia",
-    name: "Regalia 3",
+    name: "Regalia 5",
     sub: "Luxury Residential",
     cat: "Luxury Residential",
     loc: "Cher, Dholera",
@@ -342,6 +394,18 @@ export const PROJECT_SUMMARIES: ProjectSummary[] = [
     color: C.goldL,
     img: IMGS.regalia_gateway,
     desc: "Boutique — only 22 luxury plots in a prime zone with 30 MTR wide approach road.",
+  },
+  {
+    id: "elanza",
+    name: "Elanza 2",
+    sub: "New Launch",
+    cat: "Plotted Development",
+    loc: "Dholera",
+    plots: "New Launch",
+    sizes: "Multiple Sizes",
+    color: "#5a86c4",
+    img: "/projects/elanza.jpeg",
+    desc: "The latest RSC Group plotted development in the Dholera SIR growth corridor — NA/NOC title clear.",
   },
   {
     id: "paradise",
@@ -353,6 +417,7 @@ export const PROJECT_SUMMARIES: ProjectSummary[] = [
     sizes: "150–500 Sq.Yd",
     color: "#4aab82",
     img: IMGS.paradise_cover,
-    desc: "Master-planned township along the Ahmedabad-Dholera Expressway with world-class amenities.",
+    desc: "Master-planned township along the Ahmedabad-Dholera Expressway — now fully booked.",
+    soldOut: true,
   },
 ];
