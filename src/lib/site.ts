@@ -36,7 +36,7 @@ export const MAPS = {
   pride: { lat: 22.4168, lng: 72.1045, zoom: 16, label: "RSC Pride — Kasindra, Dholera" },
   aerox: { lat: 22.414795, lng: 72.287033, zoom: 16, label: "Aerox — Pipli, Dholera" },
   regalia: { lat: 22.385, lng: 72.18, zoom: 16, label: "Regalia 5 — Cher, Dholera" },
-  elanza: { lat: 22.4, lng: 72.2, zoom: 14, label: "Elanza 2 — Dholera SIR" },
+  elanza: { lat: 22.4, lng: 72.2, zoom: 14, label: "Elanza 2 — Kharod, Dholera (near TP-2)" },
   paradise: { lat: 22.395, lng: 72.078, zoom: 15, label: "Paradise — Gamph, Dholera" },
 } as const;
 

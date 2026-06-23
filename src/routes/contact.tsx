@@ -190,7 +190,7 @@ function ContactPage() {
                     <option>Pride (Kasindra, Dholera)</option>
                     <option>Aerox (Pipli, Dholera)</option>
                     <option>Regalia 5 (Cher, Dholera)</option>
-                    <option>Elanza 2 (Dholera SIR)</option>
+                    <option>Elanza 2 (Kharod, Dholera)</option>
                     <option>Paradise (Gamph, Dholera) — Sold Out</option>
                     <option>Other / General Inquiry</option>
                   </select>
