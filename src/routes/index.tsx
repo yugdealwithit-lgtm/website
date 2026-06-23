@@ -1,10 +1,12 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { C, waMsg } from "@/lib/site";
 import { PROJECT_SUMMARIES } from "@/lib/projects";
 import { SiteShell } from "@/components/site-shell";
 import { WaIcon } from "@/components/icons";
+import { DholeraCorridor } from "@/components/dholera-corridor";
 import { useReveal } from "@/hooks/use-reveal";
+import { useMagnetic } from "@/hooks/use-magnetic";
 
 interface Stat {
   n: string;
@@ -79,26 +81,6 @@ const TICKER = [
   "365-Day Site Visits",
 ];
 
-const iconSvg = (children: ReactNode): ReactNode => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={C.goldL} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    {children}
-  </svg>
-);
-
-interface WhyItem {
-  icon: ReactNode;
-  t: string;
-  d: string;
-}
-
-const WHY: WhyItem[] = [
-  { icon: iconSvg(<path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />), t: "Dholera Int'l Airport", d: "Greenfield airport on 1700 acres in Navagam Village" },
-  { icon: iconSvg(<path d="M1.5 8S3 6 6 6s6 2 9 2 6-2 9-2 4.5 2 4.5 2M1.5 16s1.5-2 4.5-2 6 2 9 2 6-2 9-2 4.5 2 4.5 2" />), t: "6-Lane Expressway", d: "109 km Ahmedabad-Dholera Expressway (NH-751)" },
-  { icon: iconSvg(<><rect x="7" y="7" width="10" height="10" rx="1" /><path d="M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4" /></>), t: "Semicon City", d: "Tata Electronics — India's first semiconductor FAB plant" },
-  { icon: iconSvg(<><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></>), t: "5000 MW Solar Park", d: "World's largest solar tracking system by Tata Power" },
-  { icon: iconSvg(<><rect x="5" y="2" width="14" height="20" rx="5" /><path d="M12 6v4M8 18h8" /><circle cx="9" cy="14" r="1" /><circle cx="15" cy="14" r="1" /></>), t: "Metro Rail", d: "Gandhinagar to Dholera Smart City connectivity" },
-  { icon: iconSvg(<path d="M2 20V8l6 4V8l6 4V4l8 4v12H2z" />), t: "Industrial Park", d: "DMIC — global manufacturing & trading hub" },
-];
 
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
@@ -124,6 +106,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 function HomePage() {
   useReveal();
+  const magnetic = useMagnetic();
   return (
     <div>
       {/* ── HERO ── */}
@@ -249,29 +232,7 @@ function HomePage() {
               Why Invest in <em className="gold-text">Dholera?</em>
             </h2>
           </div>
-          <div className="reveal-on-scroll" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))", gap: 16 }}>
-            {WHY.map((m) => (
-              <div
-                key={m.t}
-                className="why-card"
-                style={{ padding: "30px 24px", border: `1px solid ${C.border}`, background: C.black, borderRadius: 2, transition: "border-color .35s, transform .35s, box-shadow .35s, background .3s", cursor: "default" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = `${C.gold}88`;
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = `0 18px 44px -20px ${C.gold}55`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = C.border;
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div className="icon-circle">{m.icon}</div>
-                <div className="serif" style={{ fontSize: 21, fontWeight: 500, marginBottom: 8 }}>{m.t}</div>
-                <div style={{ fontSize: 12.5, color: C.muted, lineHeight: 1.8 }}>{m.d}</div>
-              </div>
-            ))}
-          </div>
+          <DholeraCorridor />
         </div>
       </section>
 
@@ -291,6 +252,7 @@ function HomePage() {
               to="/projects/$id"
               params={{ id: p.id }}
               className="proj-card"
+              {...magnetic}
               style={{ position: "relative", background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "block", borderRadius: 4 }}
             >
               {/* Glowing corner accent (carries the project colour without a side-stripe) */}
@@ -307,7 +269,7 @@ function HomePage() {
                 <h3 className="serif" style={{ fontSize: 28, fontWeight: 400, marginBottom: 6 }}>{p.name}</h3>
                 <div style={{ fontSize: 11, color: C.goldL, letterSpacing: 1.3, marginBottom: 10, display: "flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: p.color, display: "inline-block" }} />{p.loc}</div>
                 <p style={{ fontSize: 13.5, color: C.muted, lineHeight: 1.75, marginBottom: 16 }}>{p.desc}</p>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, color: p.soldOut ? C.muted : p.color, fontSize: 11, letterSpacing: 1.8, textTransform: "uppercase" }}>
+                <div className="magnetic-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, color: p.soldOut ? C.muted : p.color, fontSize: 11, letterSpacing: 1.8, textTransform: "uppercase" }}>
                   <span>{p.soldOut ? "View Details" : "Explore"}</span>
                   <span>→</span>
                 </div>

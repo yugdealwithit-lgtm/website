@@ -14,6 +14,13 @@ export const GlobalStyles = () => (
     .dwi-site *,.dwi-site *::before,.dwi-site *::after{box-sizing:border-box;margin:0;padding:0;}
     .dwi-site{background:${C.black};color:${C.white};font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;-webkit-font-smoothing:antialiased;}
     html{scroll-behavior:smooth;}
+
+    /* Lenis smooth-scroll (see SmoothScroll component) */
+    html.lenis,html.lenis body{height:auto;}
+    .lenis.lenis-smooth{scroll-behavior:auto!important;}
+    .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
+    .lenis.lenis-stopped{overflow:hidden;}
+    .lenis.lenis-smooth iframe{pointer-events:none;}
     .dwi-site ::-webkit-scrollbar{width:5px;}
     .dwi-site ::-webkit-scrollbar-track{background:${C.black};}
     .dwi-site ::-webkit-scrollbar-thumb{background:${C.goldD};}
@@ -98,8 +105,13 @@ export const GlobalStyles = () => (
     .mob-link:hover,.mob-link.active{color:${C.goldL};transform:translateX(8px);}
 
     /* ── Card / image hover ── */
-    .proj-card{animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .4s ease;will-change:transform;}
+    .proj-card{position:relative;animation:fadeUp .8s cubic-bezier(.2,.7,.2,1) both;transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .4s ease;will-change:transform;}
     .proj-card:hover{transform:translateY(-6px);box-shadow:0 28px 56px -26px rgba(201,168,76,.4);}
+    /* Cursor-tracking gold glow (positions driven by useMagnetic) */
+    .proj-card::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:0;transition:opacity .4s ease;background:radial-gradient(220px circle at var(--gx,50%) var(--gy,50%),rgba(240,212,121,.16),transparent 60%);}
+    @media (hover:hover) and (pointer:fine){.proj-card:hover::after{opacity:1;}}
+    /* Magnetic CTA — eases back to rest when the cursor leaves */
+    .magnetic-btn{transition:transform .35s cubic-bezier(.2,.7,.2,1);will-change:transform;}
     .proj-card-img{overflow:hidden;}
     .proj-card-img img{transition:transform 1.1s cubic-bezier(.2,.7,.2,1),filter .6s ease;}
     .proj-card:hover .proj-card-img img{transform:scale(1.08);filter:saturate(1.1) contrast(1.03);}
@@ -136,6 +148,15 @@ export const GlobalStyles = () => (
 
     /* ── Scroll progress ── */
     .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,${C.gold},${C.goldB},${C.gold});z-index:80;transition:width .1s linear;pointer-events:none;}
+
+    /* ── Route view transitions (gentle cross-fade + lift) ── */
+    @keyframes vt-fade-out{to{opacity:0;}}
+    @keyframes vt-fade-in{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    ::view-transition-old(root){animation:vt-fade-out .26s cubic-bezier(.2,.7,.2,1) both;}
+    ::view-transition-new(root){animation:vt-fade-in .42s cubic-bezier(.2,.7,.2,1) both;}
+    @media (prefers-reduced-motion: reduce){
+      ::view-transition-old(root),::view-transition-new(root){animation:none!important;}
+    }
 
     @media (prefers-reduced-motion: reduce){
       .dwi-site *,.dwi-site *::before,.dwi-site *::after{animation:none!important;transition:none!important;}

@@ -3,6 +3,7 @@ import { GlobalStyles } from "./global-styles";
 import { Nav } from "./nav";
 import { Footer } from "./footer";
 import { FloatingCTA } from "./floating-cta";
+import { SmoothScroll } from "./smooth-scroll";
 
 /**
  * Shared chrome for every marketing route (home, projects, project detail,
@@ -11,6 +12,7 @@ import { FloatingCTA } from "./floating-cta";
 export const SiteShell = ({ children }: { children: ReactNode }) => (
   <div className="dwi-site" style={{ animation: "fadeIn .6s ease both" }}>
     <GlobalStyles />
+    <SmoothScroll />
     <Nav />
     <FloatingCTA />
     <main>{children}</main>

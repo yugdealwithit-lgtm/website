@@ -2,8 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { C } from "@/lib/site";
 import { PROJECT_SUMMARIES } from "@/lib/projects";
 import { SiteShell } from "@/components/site-shell";
+import { useMagnetic } from "@/hooks/use-magnetic";
 
 function ProjectsPage() {
+  const magnetic = useMagnetic();
   return (
     <div>
       {/* Hero */}
@@ -38,6 +40,7 @@ function ProjectsPage() {
             params={{ id: p.id }}
             className="proj-card project-row"
             data-flip={idx % 2 === 1 ? "true" : "false"}
+            {...magnetic}
             style={{ background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "grid", gridTemplateColumns: "1fr", borderRadius: 4 }}
           >
             <div className="proj-card-img project-img" style={{ position: "relative", overflow: "hidden", minHeight: 220 }}>
@@ -64,7 +67,7 @@ function ProjectsPage() {
                   <div style={{ fontSize: 14, fontWeight: 500 }}>{p.sizes}</div>
                 </div>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, color: p.color, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
+              <div className="magnetic-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, color: p.color, fontSize: 11, letterSpacing: 1.8, textTransform: "uppercase" }}>
                 <span>View Details</span>
                 <span>→</span>
               </div>

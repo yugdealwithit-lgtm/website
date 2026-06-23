@@ -44,7 +44,7 @@ export function useReveal(selector = ".reveal-on-scroll") {
       el.style.opacity = "0";
       el.style.transform = "translateY(18px)";
       el.style.transition =
-        "opacity 0.6s cubic-bezier(.2,.7,.2,1), transform 0.6s cubic-bezier(.2,.7,.2,1)";
+        "opacity 0.45s cubic-bezier(.2,.7,.2,1), transform 0.45s cubic-bezier(.2,.7,.2,1)";
       obs.observe(el);
     });
 
