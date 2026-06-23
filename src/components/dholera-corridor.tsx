@@ -22,59 +22,119 @@ const NODES: Node[] = [
   { icon: icon(<path d="M2 20V8l6 4V8l6 4V4l8 4v12H2z" />), t: "Industrial Park", d: "DMIC — global manufacturing & trading hub" },
 ];
 
-/** Animated "growth corridor": the gold spine fills in proportion to how far
- *  you've scrolled through the section, and each infra station lights up as the
- *  line reaches it. Scroll-linked (not a one-shot). SSR-safe: visible by default. */
+/** Animated "growth corridor": a winding gold line that S-curves between the
+ *  infra stations and draws along its path as you scroll through the section.
+ *  Path geometry is measured from the live layout so it always aligns.
+ *  SSR-safe (text always present) and reduced-motion safe (static full line). */
 export function DholeraCorridor() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const svg = el.querySelector<SVGSVGElement>(".corridor-svg");
+    const track = el.querySelector<SVGPathElement>(".corridor-path-track");
+    const fill = el.querySelector<SVGPathElement>(".corridor-path-fill");
+    if (!svg || !track || !fill) return;
+    const nodes = Array.from(el.querySelectorAll<HTMLElement>(".corridor-node"));
+    const dots = Array.from(svg.querySelectorAll<SVGCircleElement>(".corridor-cdot"));
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+    let pathLen = 0;
+    let pts: { x: number; y: number }[] = [];
+
+    const buildPath = () => {
+      const tr = el.getBoundingClientRect();
+      const W = el.clientWidth;
+      const mobile = W < 720;
+      const amp = mobile ? 9 : 38; // horizontal swing of the weave
+      const axis = mobile ? 11 : W / 2; // line runs near the left on mobile, centre on desktop
+
+      pts = nodes.map((n, i) => {
+        const r = n.getBoundingClientRect();
+        const y = r.top - tr.top + 33; // ≈ station marker height inside each node
+        const x = axis + (i % 2 === 0 ? -amp : amp);
+        return { x, y };
+      });
+      if (!pts.length) return;
+
+      let d = `M ${pts[0].x} 0 L ${pts[0].x} ${pts[0].y}`;
+      for (let i = 1; i < pts.length; i++) {
+        const midY = (pts[i - 1].y + pts[i].y) / 2;
+        d += ` C ${pts[i - 1].x} ${midY}, ${pts[i].x} ${midY}, ${pts[i].x} ${pts[i].y}`;
+      }
+      svg.setAttribute("viewBox", `0 0 ${W} ${tr.height}`);
+      track.setAttribute("d", d);
+      fill.setAttribute("d", d);
+      pathLen = fill.getTotalLength();
+      fill.style.strokeDasharray = `${pathLen}`;
+      dots.forEach((c, i) => {
+        c.setAttribute("cx", `${pts[i].x}`);
+        c.setAttribute("cy", `${pts[i].y}`);
+      });
+    };
+
+    const paint = (progress: number) => {
+      fill.style.strokeDashoffset = `${pathLen * (1 - progress)}`;
+      nodes.forEach((n, i) => {
+        const active = progress >= (i + 0.4) / nodes.length;
+        n.classList.toggle("active", active);
+        dots[i]?.classList.toggle("active", active);
+      });
+    };
+
     if (reduce) {
-      el.style.setProperty("--fill", "1");
-      el.querySelectorAll(".corridor-node").forEach((n) => n.classList.add("active"));
+      buildPath();
+      paint(1); // static full line, every station lit
       return;
     }
 
     el.classList.add("armed");
-    const nodes = Array.from(el.querySelectorAll<HTMLElement>(".corridor-node"));
     let raf = 0;
-
     const update = () => {
       raf = 0;
       const r = el.getBoundingClientRect();
       const vh = window.innerHeight;
-      // 0 as the section reaches mid-viewport, 1 once scrolled most of the way through.
       const progress = Math.max(0, Math.min(1, (vh * 0.72 - r.top) / (r.height * 0.72)));
-      el.style.setProperty("--fill", progress.toFixed(3));
-      nodes.forEach((n, i) => {
-        const threshold = (i + 0.4) / nodes.length;
-        n.classList.toggle("active", progress >= threshold);
-      });
+      paint(progress);
     };
-
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
     };
+    const remeasure = () => {
+      buildPath();
+      update();
+    };
 
+    buildPath();
     update();
+    // Re-measure after fonts/layout settle and on size changes.
+    const t1 = window.setTimeout(remeasure, 300);
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(remeasure) : null;
+    ro?.observe(el);
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", remeasure);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", remeasure);
+      window.clearTimeout(t1);
+      ro?.disconnect();
       cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
     <div ref={ref} className="corridor-track">
-      <div className="corridor-spine" aria-hidden="true" />
+      <svg className="corridor-svg" preserveAspectRatio="none" aria-hidden="true">
+        <path className="corridor-path-track" fill="none" />
+        <path className="corridor-path-fill" fill="none" />
+        {NODES.map((n) => (
+          <circle key={n.t} className="corridor-cdot" r={6} />
+        ))}
+      </svg>
+
       {NODES.map((n, i) => (
         <div key={n.t} className="corridor-node" data-side={i % 2}>
-          <span className="corridor-dot" aria-hidden="true" />
           <div className="corridor-card">
             <div className="corridor-icon">{n.icon}</div>
             <div className="corridor-text">
@@ -100,21 +160,18 @@ export function DholeraCorridor() {
       </div>
 
       <style>{`
-        .corridor-track{position:relative;max-width:980px;margin:0 auto;padding:8px 0;--fill:1;}
-        .corridor-spine{position:absolute;top:0;bottom:96px;left:50%;width:2px;transform:translateX(-50%);background:${C.border};overflow:hidden;}
-        .corridor-spine::after{content:"";position:absolute;inset:0;background:linear-gradient(${C.gold},${C.goldL});transform:scaleY(var(--fill,1));transform-origin:top;transition:transform .12s linear;}
+        .corridor-track{position:relative;max-width:980px;margin:0 auto;padding:8px 0;}
+        .corridor-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0;}
+        .corridor-path-track{stroke:${C.border};stroke-width:2;}
+        .corridor-path-fill{stroke:${C.goldL};stroke-width:2.5;stroke-linecap:round;stroke-dashoffset:0;transition:stroke-dashoffset .12s linear;}
+        .corridor-cdot{fill:${C.black};stroke:${C.gold};stroke-width:2;transition:fill .3s ease,r .3s ease;}
+        .corridor-cdot.active{fill:${C.goldL};stroke:${C.goldL};filter:drop-shadow(0 0 6px rgba(240,212,121,.7));}
 
-        .corridor-node{position:relative;width:50%;box-sizing:border-box;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);}
+        .corridor-node{position:relative;z-index:1;width:50%;box-sizing:border-box;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);}
         .corridor-node[data-side="0"]{margin-left:0;padding:16px 46px 16px 0;}
         .corridor-node[data-side="1"]{margin-left:50%;padding:16px 0 16px 46px;}
-        /* Once JS takes over (armed), un-reached stations sit dimmed until the line arrives. */
         .corridor-track.armed .corridor-node{opacity:.4;transform:translateY(10px);}
         .corridor-track.armed .corridor-node.active{opacity:1;transform:none;}
-
-        .corridor-dot{position:absolute;top:26px;width:14px;height:14px;border-radius:50%;background:${C.black};border:2px solid ${C.gold};box-shadow:0 0 0 4px ${C.black};z-index:2;transition:background .3s ease,box-shadow .3s ease;}
-        .corridor-node[data-side="0"] .corridor-dot{right:-7px;}
-        .corridor-node[data-side="1"] .corridor-dot{left:-7px;}
-        .corridor-node.active .corridor-dot{background:${C.goldL};box-shadow:0 0 0 4px ${C.black},0 0 16px 1px rgba(240,212,121,.55);}
 
         .corridor-card{display:flex;gap:14px;align-items:flex-start;background:${C.card};border:1px solid ${C.border};border-radius:6px;padding:18px 20px;transition:border-color .35s ease,transform .35s cubic-bezier(.2,.7,.2,1);}
         .corridor-node[data-side="0"] .corridor-card{flex-direction:row-reverse;text-align:right;}
@@ -124,20 +181,17 @@ export function DholeraCorridor() {
         .corridor-title{font-size:19px;font-weight:500;margin-bottom:5px;color:${C.white};}
         .corridor-desc{font-size:12.5px;color:${C.muted};line-height:1.65;}
 
-        .corridor-cta{position:relative;margin-top:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(135deg,rgba(201,168,76,.08),transparent 70%);border:1px solid ${C.border};border-radius:8px;padding:28px clamp(20px,3vw,36px);}
+        .corridor-cta{position:relative;z-index:1;margin-top:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(135deg,rgba(201,168,76,.08),transparent 70%);border:1px solid ${C.border};border-radius:8px;padding:28px clamp(20px,3vw,36px);}
 
         @media(max-width:720px){
-          .corridor-spine{left:7px;bottom:120px;}
           .corridor-node,
           .corridor-node[data-side="0"],
           .corridor-node[data-side="1"]{width:100%;margin-left:0;padding:12px 0 12px 34px;}
           .corridor-node[data-side="0"] .corridor-card{flex-direction:row;text-align:left;}
-          .corridor-node[data-side="0"] .corridor-dot,
-          .corridor-node[data-side="1"] .corridor-dot{left:0;right:auto;}
         }
         @media (prefers-reduced-motion: reduce){
           .corridor-track.armed .corridor-node{opacity:1;transform:none;}
-          .corridor-spine::after{transition:none;}
+          .corridor-path-fill{transition:none;}
         }
       `}</style>
     </div>
