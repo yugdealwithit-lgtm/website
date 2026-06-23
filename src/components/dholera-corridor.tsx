@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { C, VIRTUAL_TOUR_URL } from "@/lib/site";
 
 const icon = (children: ReactNode): ReactNode => (
@@ -22,45 +22,59 @@ const NODES: Node[] = [
   { icon: icon(<path d="M2 20V8l6 4V8l6 4V4l8 4v12H2z" />), t: "Industrial Park", d: "DMIC — global manufacturing & trading hub" },
 ];
 
-/** Animated "growth corridor" — a vertical spine that fills on scroll, with infra
- *  nodes that stagger in along it. Real text stays in the DOM (crawlable). */
+/** Animated "growth corridor": the gold spine fills in proportion to how far
+ *  you've scrolled through the section, and each infra station lights up as the
+ *  line reaches it. Scroll-linked (not a one-shot). SSR-safe: visible by default. */
 export function DholeraCorridor() {
   const ref = useRef<HTMLDivElement>(null);
-  // Content is visible by default (good for SSR / crawlers / no-JS). We only
-  // "arm" the hidden-then-reveal state on the client, then reveal on scroll.
-  const [armed, setArmed] = useState(false);
-  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce || typeof IntersectionObserver === "undefined") return; // stay visible
-    setArmed(true);
-    const obs = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setInView(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    // Failsafe: never leave content hidden if the observer never fires.
-    const failsafe = window.setTimeout(() => setInView(true), 2500);
+    if (reduce) {
+      el.style.setProperty("--fill", "1");
+      el.querySelectorAll(".corridor-node").forEach((n) => n.classList.add("active"));
+      return;
+    }
+
+    el.classList.add("armed");
+    const nodes = Array.from(el.querySelectorAll<HTMLElement>(".corridor-node"));
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // 0 as the section reaches mid-viewport, 1 once scrolled most of the way through.
+      const progress = Math.max(0, Math.min(1, (vh * 0.72 - r.top) / (r.height * 0.72)));
+      el.style.setProperty("--fill", progress.toFixed(3));
+      nodes.forEach((n, i) => {
+        const threshold = (i + 0.4) / nodes.length;
+        n.classList.toggle("active", progress >= threshold);
+      });
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     return () => {
-      obs.disconnect();
-      window.clearTimeout(failsafe);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
-    <div ref={ref} className={`corridor-track${armed ? " armed" : ""}${inView ? " in" : ""}`}>
+    <div ref={ref} className="corridor-track">
       <div className="corridor-spine" aria-hidden="true" />
       {NODES.map((n, i) => (
-        <div key={n.t} className="corridor-node" data-side={i % 2} style={{ transitionDelay: `${i * 0.07}s` }}>
-          <span className="corridor-dot" aria-hidden="true" style={{ animationDelay: `${i * 0.07 + 0.12}s` }} />
+        <div key={n.t} className="corridor-node" data-side={i % 2}>
+          <span className="corridor-dot" aria-hidden="true" />
           <div className="corridor-card">
             <div className="corridor-icon">{n.icon}</div>
             <div className="corridor-text">
@@ -86,28 +100,26 @@ export function DholeraCorridor() {
       </div>
 
       <style>{`
-        .corridor-track{position:relative;max-width:980px;margin:0 auto;padding:8px 0 8px;}
+        .corridor-track{position:relative;max-width:980px;margin:0 auto;padding:8px 0;--fill:1;}
         .corridor-spine{position:absolute;top:0;bottom:96px;left:50%;width:2px;transform:translateX(-50%);background:${C.border};overflow:hidden;}
-        .corridor-spine::after{content:"";position:absolute;inset:0;background:linear-gradient(${C.gold},${C.goldL});transform:scaleY(1);transform-origin:top;transition:transform 1s cubic-bezier(.2,.7,.2,1);}
-        .corridor-track.armed .corridor-spine::after{transform:scaleY(0);}
-        .corridor-track.armed.in .corridor-spine::after{transform:scaleY(1);}
+        .corridor-spine::after{content:"";position:absolute;inset:0;background:linear-gradient(${C.gold},${C.goldL});transform:scaleY(var(--fill,1));transform-origin:top;transition:transform .12s linear;}
 
-        .corridor-node{position:relative;width:50%;box-sizing:border-box;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
-        .corridor-track.armed .corridor-node{opacity:0;transform:translateY(26px);}
+        .corridor-node{position:relative;width:50%;box-sizing:border-box;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);}
         .corridor-node[data-side="0"]{margin-left:0;padding:16px 46px 16px 0;}
         .corridor-node[data-side="1"]{margin-left:50%;padding:16px 0 16px 46px;}
-        .corridor-track.in .corridor-node{opacity:1;transform:none;}
+        /* Once JS takes over (armed), un-reached stations sit dimmed until the line arrives. */
+        .corridor-track.armed .corridor-node{opacity:.4;transform:translateY(10px);}
+        .corridor-track.armed .corridor-node.active{opacity:1;transform:none;}
 
-        .corridor-dot{position:absolute;top:26px;width:14px;height:14px;border-radius:50%;background:${C.black};border:2px solid ${C.gold};box-shadow:0 0 0 4px ${C.black};z-index:2;}
+        .corridor-dot{position:absolute;top:26px;width:14px;height:14px;border-radius:50%;background:${C.black};border:2px solid ${C.gold};box-shadow:0 0 0 4px ${C.black};z-index:2;transition:background .3s ease,box-shadow .3s ease;}
         .corridor-node[data-side="0"] .corridor-dot{right:-7px;}
         .corridor-node[data-side="1"] .corridor-dot{left:-7px;}
-        .corridor-dot::before{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid ${C.goldL};opacity:0;}
-        .corridor-track.in .corridor-dot::before{animation:corridorPulse 1.6s ease-out both;}
-        @keyframes corridorPulse{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.6);opacity:0}}
+        .corridor-node.active .corridor-dot{background:${C.goldL};box-shadow:0 0 0 4px ${C.black},0 0 16px 1px rgba(240,212,121,.55);}
 
         .corridor-card{display:flex;gap:14px;align-items:flex-start;background:${C.card};border:1px solid ${C.border};border-radius:6px;padding:18px 20px;transition:border-color .35s ease,transform .35s cubic-bezier(.2,.7,.2,1);}
         .corridor-node[data-side="0"] .corridor-card{flex-direction:row-reverse;text-align:right;}
-        .corridor-card:hover{border-color:${C.goldD};transform:translateY(-3px);}
+        .corridor-node.active .corridor-card{border-color:${C.goldD};}
+        .corridor-card:hover{border-color:${C.goldL};transform:translateY(-3px);}
         .corridor-icon{flex-shrink:0;width:44px;height:44px;border-radius:50%;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.06);display:flex;align-items:center;justify-content:center;}
         .corridor-title{font-size:19px;font-weight:500;margin-bottom:5px;color:${C.white};}
         .corridor-desc{font-size:12.5px;color:${C.muted};line-height:1.65;}
@@ -124,9 +136,8 @@ export function DholeraCorridor() {
           .corridor-node[data-side="1"] .corridor-dot{left:0;right:auto;}
         }
         @media (prefers-reduced-motion: reduce){
-          .corridor-node{opacity:1;transform:none;}
-          .corridor-spine::after{transform:scaleY(1);}
-          .corridor-dot::before{display:none;}
+          .corridor-track.armed .corridor-node{opacity:1;transform:none;}
+          .corridor-spine::after{transition:none;}
         }
       `}</style>
     </div>
