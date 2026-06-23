@@ -72,17 +72,20 @@ export default {
     try {
       const url = new URL(request.url);
 
-      // Permanent HTTP -> HTTPS redirect for all paths. Behind Cloudflare the
-      // original scheme arrives via the CF-Visitor header (and X-Forwarded-Proto),
-      // since the Worker may otherwise see https. (Belt-and-suspenders for the
-      // zone's "Always Use HTTPS" setting.)
+      // Canonicalise scheme AND host in a single 301 hop:
+      //   http(s)://www.example  ->  https://example   (one redirect, no chains/loops)
+      // The real scheme arrives via the CF-Visitor header (and X-Forwarded-Proto)
+      // behind Cloudflare, since the Worker may otherwise see https. The www ->
+      // non-www redirect removes the duplicate-URL split that splits SEO equity.
       const cfVisitor = request.headers.get("cf-visitor") ?? "";
       const isHttp =
         url.protocol === "http:" ||
         request.headers.get("x-forwarded-proto") === "http" ||
         /"scheme"\s*:\s*"http"/.test(cfVisitor);
-      if (isHttp) {
+      const isWww = url.hostname.startsWith("www.");
+      if (isHttp || isWww) {
         url.protocol = "https:";
+        if (isWww) url.hostname = url.hostname.slice(4);
         return Response.redirect(url.toString(), 301);
       }
 
