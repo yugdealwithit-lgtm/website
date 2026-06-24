@@ -327,8 +327,9 @@ function BlogStyles() {
     <style>{`
       /* ── Hero ── */
       .blog-hero{position:relative;display:flex;align-items:flex-end;min-height:clamp(420px,62vh,580px);overflow:hidden;border-bottom:1px solid ${C.border};}
-      .blog-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02);}
-      .blog-hero-veil{position:absolute;inset:0;background:linear-gradient(to top,${C.black} 4%,${C.black}cc 28%,${C.black}33 62%,${C.black}99 100%);}
+      .blog-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.02) brightness(.8);}
+      .blog-hero-veil{position:absolute;inset:0;background:linear-gradient(to top,${C.black} 0%,${C.black}f2 18%,${C.black}b3 42%,${C.black}66 70%,${C.black}cc 100%);}
+      .blog-hero-veil::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,${C.black}cc 0%,transparent 38%);}
       .blog-hero--plain{background:linear-gradient(135deg,${C.black},${C.card});}
       .blog-hero-inner{position:relative;z-index:2;max-width:880px;width:100%;margin:0 auto;padding:0 clamp(18px,5vw,40px) clamp(40px,6vw,64px);}
       .blog-hero--plain .blog-hero-inner{padding-top:150px;}
