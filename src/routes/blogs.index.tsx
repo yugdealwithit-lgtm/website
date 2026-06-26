@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { C } from "@/lib/site";
@@ -17,26 +16,7 @@ interface PublishedPost {
 }
 
 function BlogsPage() {
-  const [posts, setPosts] = useState<PublishedPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      const { data } = await supabase
-        .from("blogs")
-        .select("id,title,slug,excerpt,category,read_time,published_at,cover_image_url")
-        .eq("status", "published")
-        .order("published_at", { ascending: false });
-      if (active) {
-        setPosts((data as PublishedPost[] | null) ?? []);
-        setLoading(false);
-      }
-    })();
-    return () => {
-      active = false;
-    };
-  }, []);
+  const { posts } = Route.useLoaderData();
 
   return (
     <div>
@@ -74,9 +54,7 @@ function BlogsPage() {
           gap: 24,
         }}
       >
-        {loading ? (
-          <div style={{ color: C.muted, fontSize: 13, padding: "40px 0" }}>Loading posts…</div>
-        ) : posts.length === 0 ? (
+        {posts.length === 0 ? (
           <div style={{ color: C.muted, fontSize: 13, padding: "40px 0", gridColumn: "1/-1", textAlign: "center" }}>
             No posts yet. Check back soon.
           </div>
@@ -143,6 +121,14 @@ function BlogsRoute() {
 }
 
 export const Route = createFileRoute("/blogs/")({
+  loader: async () => {
+    const { data } = await supabase
+      .from("blogs")
+      .select("id,title,slug,excerpt,category,read_time,published_at,cover_image_url")
+      .eq("status", "published")
+      .order("published_at", { ascending: false });
+    return { posts: (data as PublishedPost[] | null) ?? [] };
+  },
   head: () => ({
     meta: [
       { title: "Dholera Investment Blog | Real Estate Insights | DealWithIt" },
