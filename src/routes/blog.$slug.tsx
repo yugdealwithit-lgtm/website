@@ -1,11 +1,23 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { C } from "@/lib/site";
 import { SiteShell } from "@/components/site-shell";
 
+// 301 redirects from deduped/malformed legacy slugs to their canonical post.
+// Keeps already-crawled duplicate URLs consolidated instead of 404-ing.
+const SLUG_REDIRECTS: Record<string, string> = {
+  "dholeraplotprice-2026": "dholera-plot-price-2026",
+  "dholera-updates-june-2026": "dholera-smart-city-update-2026",
+  "blogsafe-invest-dholera": "is-it-safe-to-invest-in-dholera",
+};
+
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
+    const canonical = SLUG_REDIRECTS[params.slug];
+    if (canonical) {
+      throw redirect({ to: "/blog/$slug", params: { slug: canonical }, statusCode: 301 });
+    }
     const { data, error } = await supabase
       .from("blogs")
       .select("*")
