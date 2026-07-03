@@ -39,6 +39,15 @@ export interface Project {
   seoDescription?: string;
   schemaName?: string;
   schemaDescription?: string;
+  // Optional RealEstateAgent block merged into the listing JSON-LD as `offeredBy`.
+  // Used to anchor DealWithIt Realty as the channel partner and disambiguate it
+  // from the developer (rscgroupdholera.in) for search + AI engines.
+  schemaOfferedBy?: {
+    "@type": "RealEstateAgent";
+    name: string;
+    description: string;
+    url: string;
+  };
   faqs?: { q: string; a: string; inSchema?: boolean }[];
 }
 
@@ -109,12 +118,19 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "💻", title: "Tata Semiconductor", desc: "India's first semiconductor FAB plant nearby" },
       { icon: "☀️", title: "Tata Solar Park", desc: "5000 MW world's largest solar park" },
     ],
-    seoTitle: "RSC Pride Dholera – Plot Sizes & Booking | DealWithIt Realty",
+    seoTitle: "RSC Pride Dholera SIR – Plot Prices, Sizes & Booking | DealWithIt Realty",
     seoDescription:
-      "Book RERA-approved residential plots in RSC Pride, Dholera SIR through DealWithIt Realty. NA/NOC title-clear plots, flexible payment plans, and full investment guidance.",
-    schemaName: "RSC Pride - Dholera SIR",
+      "RERA-authorised channel partner for RSC Pride, Dholera SIR. Plot sizes 153–444 sq.yd, NA/NOC/title-clear, transparent pricing. Book a site visit today.",
+    schemaName: "RSC Pride Prime, Dholera SIR",
     schemaDescription:
-      "RERA-approved residential plots in RSC Pride, Dholera Special Investment Region, Gujarat. NA/NOC title-clear plots offered through DealWithIt Realty.",
+      "Residential plots in Dholera Special Investment Region, Gujarat. Plot sizes 153 to 444 sq.yd, NA/NOC and title-clear.",
+    schemaOfferedBy: {
+      "@type": "RealEstateAgent",
+      name: "DealWithIt Realty",
+      description:
+        "RERA-authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
+      url: "https://dealwithit.org.in",
+    },
     faqs: [
       {
         q: "Is this project RERA-approved?",
@@ -178,12 +194,19 @@ export const PROJECTS: Record<ProjectId, Project> = {
       { icon: "🏢", title: "ABCD Building", desc: "Central admin of Dholera Smart City" },
       { icon: "⚡", title: "Activation Area", desc: "Near 22.5 sq.km Dholera activation zone" },
     ],
-    seoTitle: "Aerox Dholera SIR – Residential & Commercial Plots | DealWithIt Realty",
+    seoTitle: "RSC Aerox Dholera – Residential Plots Near Airport | DealWithIt Realty",
     seoDescription:
-      "Aerox in Dholera SIR offers title-clear residential and commercial plots near the Dholera-Ahmedabad highway. DealWithIt Realty helps you invest with confidence — sizes, locations, and booking details inside.",
-    schemaName: "Aerox - Dholera SIR",
+      "RSC Aerox offers residential plots in Dholera SIR near the upcoming international airport. RERA-approved, title-clear. Get 2026 pricing from DealWithIt Realty.",
+    schemaName: "RSC Aerox, Dholera SIR",
     schemaDescription:
-      "RERA-approved residential and commercial plots in Aerox, Dholera Special Investment Region, near the Ahmedabad-Dholera highway. Offered through DealWithIt Realty.",
+      "Residential plots in Dholera Special Investment Region, Gujarat, near the upcoming Dholera International Airport. NA/NOC and title-clear.",
+    schemaOfferedBy: {
+      "@type": "RealEstateAgent",
+      name: "DealWithIt Realty",
+      description:
+        "RERA-authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
+      url: "https://dealwithit.org.in",
+    },
     faqs: [
       {
         q: "Is this project RERA-approved?",

@@ -311,6 +311,9 @@ function ProjectDetailRoute() {
     ...(geo ? { geo: { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng } } : {}),
     address: { "@type": "PostalAddress", addressLocality: proj.loc, addressRegion: "Gujarat", addressCountry: "IN" },
     areaServed: { "@type": "Place", name: "Dholera SIR, Gujarat, India" },
+    // Optional per-project agent block (channel-partner disambiguation). Only set
+    // on projects that opt in via `schemaOfferedBy` (currently Pride & Aerox).
+    ...(proj.schemaOfferedBy ? { offeredBy: proj.schemaOfferedBy } : {}),
     // DealWithIt Realty is the listing realtor — a distinct entity from the
     // developer (RSC Group). This anchors the brand for AI engines.
     broker: {

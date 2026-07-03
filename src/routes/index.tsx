@@ -442,14 +442,14 @@ function HomeRoute() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { name: "description", content: "DealWithIt Realty offers RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process, and end-to-end investment support." },
+      { title: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
+      { name: "description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
       { name: "keywords", content: "dholera plots, dholera smart city, residential plots dholera, dholera sir investment, rsc pride dholera, aerox dholera, buy plot dholera, dealwithit realty" },
-      { property: "og:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { property: "og:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process, and end-to-end investment support." },
+      { property: "og:title", content: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
+      { property: "og:description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
       { property: "og:url", content: "https://dealwithit.org.in/" },
-      { name: "twitter:title", content: "DealWithIt Realty | RERA-Approved Plots in Dholera SIR – RSC Pride & Aerox" },
-      { name: "twitter:description", content: "RERA-approved residential & commercial plots in Dholera SIR, Gujarat — including RSC Pride and Aerox. Clear-title plots, transparent process." },
+      { name: "twitter:title", content: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
+      { name: "twitter:description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
     ],
     links: [
       { rel: "canonical", href: "https://dealwithit.org.in/" },
