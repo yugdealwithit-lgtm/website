@@ -120,10 +120,10 @@ export const PROJECTS: Record<ProjectId, Project> = {
     ],
     seoTitle: "RSC Pride Dholera SIR – Plot Prices, Sizes & Booking | DealWithIt Realty",
     seoDescription:
-      "RERA-authorised channel partner for RSC Pride, Dholera SIR. Plot sizes 153–444 sq.yd, NA/NOC/title-clear, transparent pricing. Book a site visit today.",
+      "RERA-authorised channel partner for RSC Pride, Dholera SIR. Plot sizes 150–400 sq.yd, NA/NOC/title-clear, transparent pricing. Book a site visit today.",
     schemaName: "RSC Pride Prime, Dholera SIR",
     schemaDescription:
-      "Residential plots in Dholera Special Investment Region, Gujarat. Plot sizes 153 to 444 sq.yd, NA/NOC and title-clear.",
+      "Residential plots in Dholera Special Investment Region, Gujarat. Plot sizes 150 to 400 sq.yd, NA/NOC and title-clear.",
     schemaOfferedBy: {
       "@type": "RealEstateAgent",
       name: "DealWithIt Realty",
