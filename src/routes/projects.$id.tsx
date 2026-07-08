@@ -308,6 +308,7 @@ function ProjectDetailRoute() {
     name: proj.schemaName ?? `${proj.name} — ${proj.cat}, Dholera SIR`,
     description: proj.schemaDescription ?? proj.about,
     url: `https://dealwithit.org.in/projects/${proj.id}`,
+    image: proj.id === "elanza" ? "https://dealwithit.org.in/projects/elanza.jpeg" : "https://dealwithit.org.in/logo.jpg",
     ...(geo ? { geo: { "@type": "GeoCoordinates", latitude: geo.lat, longitude: geo.lng } } : {}),
     address: { "@type": "PostalAddress", addressLocality: proj.loc, addressRegion: "Gujarat", addressCountry: "IN" },
     areaServed: { "@type": "Place", name: "Dholera SIR, Gujarat, India" },
