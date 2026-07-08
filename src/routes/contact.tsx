@@ -243,8 +243,12 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact DealWithIt | Book a Free Site Visit in Dholera" },
       { property: "og:description", content: "Call, WhatsApp or fill the form to book a free site visit to Dholera SIR projects." },
       { property: "og:url", content: "https://dealwithit.org.in/contact" },
+      { property: "og:image", content: "https://dealwithit.org.in/logo.jpg" },
+      { property: "og:image:alt", content: "Contact DealWithIt Real Estate" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Contact DealWithIt | Book a Free Site Visit in Dholera" },
       { name: "twitter:description", content: "Call, WhatsApp or fill the form to book a free site visit to Dholera SIR projects." },
+      { name: "twitter:image", content: "https://dealwithit.org.in/logo.jpg" },
     ],
     links: [
       { rel: "canonical", href: "https://dealwithit.org.in/contact" },
