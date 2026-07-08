@@ -39,10 +39,10 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
         { property: "og:url", content: `https://dealwithit.org.in/blog/${params.slug}` },
-        { property: "og:image", content: p?.cover_image_url || "https://dealwithit.org.in/logo.jpg" },
+        { property: "og:image", content: p?.cover_image_url || "https://dealwithit.org.in/og-image.png" },
         { property: "og:image:alt", content: title },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:image", content: p?.cover_image_url || "https://dealwithit.org.in/logo.jpg" },
+        { name: "twitter:image", content: p?.cover_image_url || "https://dealwithit.org.in/og-image.png" },
       ],
       links: [{ rel: "canonical", href: `https://dealwithit.org.in/blog/${params.slug}` }],
     };
@@ -105,7 +105,7 @@ function BlogPostPage() {
       "@type": "Organization",
       name: "DealWithIt Realty",
       url: "https://dealwithit.org.in/",
-      logo: { "@type": "ImageObject", url: "https://dealwithit.org.in/logo.jpg" },
+      logo: { "@type": "ImageObject", url: "https://dealwithit.org.in/og-image.png" },
     },
   };
 
