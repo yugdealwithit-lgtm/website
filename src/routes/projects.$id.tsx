@@ -376,8 +376,12 @@ export const Route = createFileRoute("/projects/$id")({
         { property: "og:description", content: desc },
         { property: "og:url", content: url },
         { property: "og:type", content: "website" },
+        { property: "og:image", content: proj?.id === "elanza" ? "https://dealwithit.org.in/projects/elanza.jpeg" : "https://dealwithit.org.in/logo.jpg" },
+        { property: "og:image:alt", content: title },
+        { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
+        { name: "twitter:image", content: proj?.id === "elanza" ? "https://dealwithit.org.in/projects/elanza.jpeg" : "https://dealwithit.org.in/logo.jpg" },
       ],
       links: [
         { rel: "canonical", href: url },
