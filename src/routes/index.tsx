@@ -443,19 +443,19 @@ function HomeRoute() {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
-      { name: "description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
+      { title: "DealWithIt Realty | Dholera SIR Plots" },
+      { name: "description", content: "Premium plots in Dholera SIR by RSC Group. NA/NOC certified, 100% title clear. Book a free site visit today." },
       { name: "keywords", content: "dholera plots, dholera smart city, residential plots dholera, dholera sir investment, rsc pride dholera, aerox dholera, buy plot dholera, dealwithit realty" },
-      { property: "og:title", content: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
-      { property: "og:description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
+      { property: "og:title", content: "DealWithIt Realty | Dholera SIR Plots" },
+      { property: "og:description", content: "Premium plots in Dholera SIR by RSC Group. NA/NOC certified, 100% title clear. Book a free site visit today." },
       { property: "og:url", content: "https://dealwithit.org.in/" },
       { property: "og:image", content: "https://dealwithit.org.in/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "DealWithIt Realty — Dholera SIR Plots" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "DealWithIt Realty – RERA-Authorised Channel Partner, Dholera SIR Plots" },
-      { name: "twitter:description", content: "Buy RERA-approved residential plots in Dholera SIR through DealWithIt Realty, official channel partner for RSC Pride, Aerox, Regalia & Elanza." },
+      { name: "twitter:title", content: "DealWithIt Realty | Dholera SIR Plots" },
+      { name: "twitter:description", content: "Premium plots in Dholera SIR by RSC Group. NA/NOC certified, 100% title clear. Book a free site visit today." },
       { name: "twitter:image", content: "https://dealwithit.org.in/og-image.png" },
     ],
     links: [
