@@ -11,6 +11,7 @@ interface NavItem {
 
 const LINKS: NavItem[] = [
   { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
   { label: "Pride", to: "/projects/$id", params: { id: "pride" } },
   { label: "Aerox", to: "/projects/$id", params: { id: "aerox" } },

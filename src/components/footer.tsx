@@ -68,6 +68,7 @@ export const Footer = () => (
         <div>
           <div className="sl" style={{ marginBottom: 16 }}>Pages</div>
           <Link to="/" style={footerLinkStyle}>Home</Link>
+          <Link to="/about" style={footerLinkStyle}>About</Link>
           <Link to="/projects" style={footerLinkStyle}>Projects</Link>
           <Link to="/blogs" style={footerLinkStyle}>Blogs</Link>
           <Link to="/contact" style={footerLinkStyle}>Contact</Link>

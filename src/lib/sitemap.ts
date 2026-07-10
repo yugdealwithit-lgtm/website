@@ -23,6 +23,7 @@ type UrlEntry = {
 // src/lib/projects.ts (pride, aerox, regalia, elanza, paradise).
 const STATIC_ROUTES: UrlEntry[] = [
   { loc: "/", changefreq: "weekly", priority: "1.0" },
+  { loc: "/about", changefreq: "monthly", priority: "0.7" },
   { loc: "/projects", changefreq: "weekly", priority: "0.9" },
   { loc: "/projects/pride", changefreq: "monthly", priority: "0.8" },
   { loc: "/projects/aerox", changefreq: "monthly", priority: "0.8" },
