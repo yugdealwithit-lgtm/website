@@ -23,7 +23,7 @@ const SocialRow = () => (
 
 const footerLinkStyle: React.CSSProperties = {
   color: C.muted,
-  fontSize: 12,
+  fontSize: 13,
   marginBottom: 10,
   display: "block",
   transition: "color .3s",
@@ -58,7 +58,7 @@ export const Footer = () => (
               <div style={{ fontSize: 7, letterSpacing: 4, color: C.gold }}>REAL ESTATE</div>
             </div>
           </div>
-          <p style={{ color: C.muted, fontSize: 13, lineHeight: 1.9, marginBottom: 18, maxWidth: 300 }}>
+          <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.9, marginBottom: 18, maxWidth: 300 }}>
             Your trusted partner for premium real estate investments in Dholera Smart City — India's first greenfield smart city.
           </p>
           <SocialRow />
@@ -89,17 +89,17 @@ export const Footer = () => (
         <div>
           <div className="sl" style={{ marginBottom: 16 }}>Contact</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
-            <a href={`tel:+${PHONE}`} style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 12 }}>
+            <a href={`tel:+${PHONE}`} style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 13 }}>
               <span>📞</span>
               {PHONE_DISPLAY}
             </a>
-            <a href={waMsg("Hi!")} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 12 }}>
+            <a href={waMsg("Hi!")} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 13 }}>
               <WaIcon size={14} /> WhatsApp Us
             </a>
-            <a href={INSTA} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 12 }}>
+            <a href={INSTA} target="_blank" rel="noreferrer" style={{ display: "flex", alignItems: "center", gap: 8, color: C.muted, fontSize: 13 }}>
               <InstaIcon size={14} /> @dealwithit.realty
             </a>
-            <p style={{ color: C.muted, fontSize: 12, lineHeight: 1.8, marginTop: 4 }}>
+            <p style={{ color: C.muted, fontSize: 13.5, lineHeight: 1.85, marginTop: 4 }}>
               904, 9th Floor, Signature-1,
               <br />
               Opp. Andaz Party Plot,

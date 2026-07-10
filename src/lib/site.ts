@@ -11,8 +11,8 @@ export const C = {
   goldB: "#f7e4a0",   // brightest gold (shimmer peak)
   goldD: "#9a7b2e",   // deep gold (fills / pressed states)
   white: "#f6f1e6",   // warm cream text
-  muted: "#b09f86",   // warm muted text (brighter & warmer than old #888880)
-  mutedD: "#7d6f5a",  // dim muted (de-emphasised labels)
+  muted: "#ccc1b0",   // warm muted text — lightened for body-copy legibility (was #b09f86)
+  mutedD: "#9a8c74",  // dim muted (de-emphasised labels) — lightened to match
   border: "#3a2f1e",  // warm gold-tinted hairline
 } as const;
 

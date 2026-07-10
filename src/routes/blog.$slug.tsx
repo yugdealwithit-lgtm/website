@@ -162,7 +162,7 @@ function BlogPostPage() {
           <h2 className="serif" style={{ fontSize: "clamp(24px,3.5vw,34px)", fontWeight: 300, marginBottom: 16 }}>
             Talk to a Dholera <em className="gold-text">specialist</em>
           </h2>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 24, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 24, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
             Get a personalised site visit, plot availability and pricing for Pride, Aerox, Regalia 5 and Elanza 2.
           </p>
           <Link to="/contact" className="btn-gold">Enquire Now</Link>

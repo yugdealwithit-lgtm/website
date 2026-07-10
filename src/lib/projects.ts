@@ -120,7 +120,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
     ],
     seoTitle: "RSC Pride Dholera SIR – Plot Prices, Sizes & Booking | DealWithIt Realty",
     seoDescription:
-      "RERA-authorised channel partner for RSC Pride, Dholera SIR. Plot sizes 150–400 sq.yd, NA/NOC/title-clear, transparent pricing. Book a site visit today.",
+      "Authorised channel partner for RSC Pride, Dholera SIR. Plot sizes 150–400 sq.yd, NA/NOC/title-clear, transparent pricing. Book a site visit today.",
     schemaName: "RSC Pride Prime, Dholera SIR",
     schemaDescription:
       "Residential plots in Dholera Special Investment Region, Gujarat. Plot sizes 150 to 400 sq.yd, NA/NOC and title-clear.",
@@ -128,13 +128,13 @@ export const PROJECTS: Record<ProjectId, Project> = {
       "@type": "RealEstateAgent",
       name: "DealWithIt Realty",
       description:
-        "RERA-authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
+        "Authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
       url: "https://dealwithit.org.in",
     },
     faqs: [
       {
-        q: "Is this project RERA-approved?",
-        a: "Yes, the project is RERA-registered with NA/NOC title-clear plots ready for immediate registration.",
+        q: "Is this project RERA-registered?",
+        a: "No — this category of plotted land in Dholera SIR isn't required to be RERA-registered. It is NA/NOC certified with title-clear plots ready for immediate registration.",
         inSchema: true,
       },
       {
@@ -196,7 +196,7 @@ export const PROJECTS: Record<ProjectId, Project> = {
     ],
     seoTitle: "RSC Aerox Dholera – Residential Plots Near Airport | DealWithIt Realty",
     seoDescription:
-      "RSC Aerox offers residential plots in Dholera SIR near the upcoming international airport. RERA-approved, title-clear. Get 2026 pricing from DealWithIt Realty.",
+      "RSC Aerox offers residential plots in Dholera SIR near the upcoming international airport. NA/NOC certified, title-clear. Get 2026 pricing from DealWithIt Realty.",
     schemaName: "RSC Aerox, Dholera SIR",
     schemaDescription:
       "Residential plots in Dholera Special Investment Region, Gujarat, near the upcoming Dholera International Airport. NA/NOC and title-clear.",
@@ -204,13 +204,13 @@ export const PROJECTS: Record<ProjectId, Project> = {
       "@type": "RealEstateAgent",
       name: "DealWithIt Realty",
       description:
-        "RERA-authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
+        "Authorised channel partner for RSC Group's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
       url: "https://dealwithit.org.in",
     },
     faqs: [
       {
-        q: "Is this project RERA-approved?",
-        a: "Yes, the project is RERA-registered with NA/NOC title-clear plots ready for immediate registration.",
+        q: "Is this project RERA-registered?",
+        a: "No — this category of plotted land in Dholera SIR isn't required to be RERA-registered. It is NA/NOC certified with title-clear plots ready for immediate registration.",
         inSchema: true,
       },
       {

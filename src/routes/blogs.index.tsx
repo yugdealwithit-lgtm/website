@@ -37,7 +37,7 @@ function BlogsPage() {
           <h1 className="serif" style={{ fontWeight: 300, fontSize: "clamp(40px,7vw,84px)", lineHeight: 1 }}>
             DealWithIt <em className="gold-text">Blogs</em>
           </h1>
-          <p style={{ fontSize: 14, color: C.muted, marginTop: 16, maxWidth: 620, lineHeight: 1.8 }}>
+          <p style={{ fontSize: 15, color: C.muted, marginTop: 16, maxWidth: 620, lineHeight: 1.8 }}>
             Market insights, buying guides and project updates from the RSC Group Dholera team.
           </p>
         </div>
@@ -83,7 +83,7 @@ function BlogsPage() {
                     )}
                   </div>
                   <h3 className="serif" style={{ fontSize: 22, fontWeight: 500, lineHeight: 1.3, marginBottom: 12, color: C.white }}>{b.title}</h3>
-                  <p style={{ fontSize: 12.5, color: C.muted, lineHeight: 1.8, marginBottom: 18, flex: 1 }}>{b.excerpt || ""}</p>
+                  <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.8, marginBottom: 18, flex: 1 }}>{b.excerpt || ""}</p>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, color: C.goldL, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
                     <span>Read More</span>
                     <span>→</span>
@@ -102,7 +102,7 @@ function BlogsPage() {
           <h2 className="serif" style={{ fontSize: "clamp(24px,3.5vw,34px)", fontWeight: 300, marginBottom: 16 }}>
             Talk to a Dholera <em className="gold-text">specialist</em>
           </h2>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 24, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 24, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
             Get a personalised site visit and plot availability for Pride, Aerox, Regalia 5 and Elanza 2.
           </p>
           <Link to="/contact" className="btn-gold">Enquire Now</Link>

@@ -38,7 +38,7 @@ const BookingCard = ({ proj }: { proj: Project }) => (
         ].map(([l, v]) => (
           <div key={l} style={{ background: C.card, padding: "12px 14px" }}>
             <div style={{ fontSize: 11, color: C.muted, letterSpacing: 1.2, marginBottom: 4, textTransform: "uppercase" }}>{l}</div>
-            <div style={{ fontSize: 13, fontWeight: 500 }}>{v}</div>
+            <div style={{ fontSize: 14, fontWeight: 500 }}>{v}</div>
           </div>
         ))}
       </div>
@@ -57,7 +57,7 @@ const BookingCard = ({ proj }: { proj: Project }) => (
         )}
         <Link to="/contact" className="btn-out" style={{ width: "100%" }}>Send a Message</Link>
       </div>
-      <p style={{ fontSize: 10, color: C.muted, marginTop: 14, textAlign: "center", lineHeight: 1.6 }}>
+      <p style={{ fontSize: 11, color: C.muted, marginTop: 14, textAlign: "center", lineHeight: 1.6 }}>
         Site visits available 365 days a year.
       </p>
     </div>
@@ -144,7 +144,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
             ].map((s) => (
               <div key={s.l}>
                 <div style={{ fontSize: 11, color: C.muted, letterSpacing: 2, marginBottom: 3, textTransform: "uppercase" }}>{s.l}</div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>{s.v}</div>
+                <div style={{ fontSize: 14, fontWeight: 500 }}>{s.v}</div>
               </div>
             ))}
           </div>
@@ -175,7 +175,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
               <div className="sl" style={{ marginBottom: 10 }}>About the Project</div>
               <div className="divl" />
               <h2 className="serif" style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 400, marginBottom: 16 }}>About <em>{name}</em></h2>
-              <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.95, marginBottom: 22 }}>{about}</p>
+              <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.95, marginBottom: 22 }}>{about}</p>
 
               <img src={imgs[1]} alt={name} style={{ width: "100%", height: "clamp(220px,32vw,320px)", objectFit: "cover", border: `1px solid ${C.border}`, marginBottom: 28, borderRadius: 2 }} />
 
@@ -184,7 +184,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
                 {whyInvest.map((w) => (
                   <div key={w} style={{ display: "flex", gap: 10, alignItems: "flex-start", marginBottom: 10 }}>
                     <div style={{ width: 6, height: 6, background: color, marginTop: 7, flexShrink: 0, transform: "rotate(45deg)" }} />
-                    <span style={{ fontSize: 13, color: C.muted, lineHeight: 1.7 }}>{w}</span>
+                    <span style={{ fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{w}</span>
                   </div>
                 ))}
               </div>
@@ -194,8 +194,8 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
                   <div className="sl" style={{ marginBottom: 12 }}>Project Details</div>
                   {surveyInfo.map((s, i) => (
                     <div key={s.label} style={{ display: "flex", justifyContent: "space-between", padding: "9px 0", borderBottom: i < surveyInfo.length - 1 ? `1px solid ${C.border}` : "none" }}>
-                      <span style={{ fontSize: 12, color: C.muted }}>{s.label}</span>
-                      <span style={{ fontSize: 12, fontWeight: 500 }}>{s.value}</span>
+                      <span style={{ fontSize: 13, color: C.muted }}>{s.label}</span>
+                      <span style={{ fontSize: 13, fontWeight: 500 }}>{s.value}</span>
                     </div>
                   ))}
                 </div>
@@ -264,8 +264,8 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
                   <div key={b.title} style={{ display: "flex", gap: 12, padding: "16px 0", borderBottom: `1px solid ${C.border}`, alignItems: "flex-start" }}>
                     <div style={{ background: `${color}22`, border: `1px solid ${color}44`, padding: "9px 11px", fontSize: 16, flexShrink: 0 }}>{b.icon}</div>
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 500, marginBottom: 3 }}>{b.title}</div>
-                      <div style={{ fontSize: 12, color: C.muted, lineHeight: 1.7 }}>{b.desc}</div>
+                      <div style={{ fontSize: 14, fontWeight: 500, marginBottom: 3 }}>{b.title}</div>
+                      <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.7 }}>{b.desc}</div>
                     </div>
                   </div>
                 ))}
@@ -284,7 +284,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
                   <div className="sl" style={{ marginBottom: 10 }}>Booking Status</div>
                   <div className="divl" />
                   <h2 className="serif" style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 400 }}>Plot <em>Inventory & Layout</em></h2>
-                  <p style={{ color: C.muted, fontSize: 12.5, marginTop: 10, lineHeight: 1.7, maxWidth: 480 }}>
+                  <p style={{ color: C.muted, fontSize: 13.5, marginTop: 10, lineHeight: 1.7, maxWidth: 480 }}>
                     Live layout plan. Red = Booked, White = Available. Tap to zoom.
                   </p>
                 </div>
@@ -294,7 +294,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
               </div>
               <InventoryMap src={bookingImg} alt={`${name} booking status`} />
               <div style={{ marginTop: 20, background: C.card, border: `1px solid ${C.border}`, padding: "18px 22px", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", alignItems: "center", borderRadius: 2 }}>
-                <span style={{ fontSize: 12.5, color: C.muted }}>Want to book a specific plot?</span>
+                <span style={{ fontSize: 13.5, color: C.muted }}>Want to book a specific plot?</span>
                 <a href={waMsg(`Hi! I've seen the ${name} layout and want to book a plot.`)} target="_blank" rel="noreferrer">
                   <button className="btn-gold" style={{ padding: "10px 20px", fontSize: 10 }}>Enquire on WhatsApp</button>
                 </a>
@@ -323,7 +323,7 @@ function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSumm
                 {visibleFaqs.map((f) => (
                   <div key={f.q} style={{ borderBottom: `1px solid ${C.border}`, padding: "18px 0" }}>
                     <h3 style={{ fontSize: 15, fontWeight: 600, marginBottom: 8 }}>{f.q}</h3>
-                    <p style={{ fontSize: 13.5, color: C.muted, lineHeight: 1.8, margin: 0 }}>{f.a}</p>
+                    <p style={{ fontSize: 14.5, color: C.muted, lineHeight: 1.85, margin: 0 }}>{f.a}</p>
                   </div>
                 ))}
               </div>
@@ -369,7 +369,6 @@ function ProjectDetailRoute() {
       sameAs: ["https://instagram.com/dealwithit.realty"],
     },
     additionalProperty: [
-      { "@type": "PropertyValue", name: "Approval", value: "RERA-approved" },
       { "@type": "PropertyValue", name: "Land Status", value: "NA / NOC, 100% Title Clear" },
       { "@type": "PropertyValue", name: "Plot Sizes", value: proj.sizes },
       { "@type": "PropertyValue", name: "Inventory", value: proj.plots },

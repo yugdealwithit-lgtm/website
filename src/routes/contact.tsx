@@ -94,7 +94,7 @@ function ContactPage() {
               <br />
               <em>to Help</em>
             </h2>
-            <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.95, marginBottom: 26 }}>
+            <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.95, marginBottom: 26 }}>
               Whether first-time investor or seasoned buyer — our experts guide you through the best investment opportunities in Dholera Smart City.
             </p>
 
@@ -134,7 +134,7 @@ function ContactPage() {
               <div className="sl" style={{ marginBottom: 14 }}>Our Offices</div>
               <div style={{ marginBottom: 16 }}>
                 <div style={{ fontSize: 10, color: C.gold, marginBottom: 5, letterSpacing: 1 }}>CORPORATE OFFICE</div>
-                <p style={{ fontSize: 12.5, color: C.muted, lineHeight: 1.9 }}>
+                <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.9 }}>
                   904, 9th Floor, Signature-1, Opp. Andaz Party Plot,
                   <br />
                   S.G. Highway, Makarba, Ahmedabad – 380 051
@@ -142,7 +142,7 @@ function ContactPage() {
               </div>
               <div>
                 <div style={{ fontSize: 10, color: C.gold, marginBottom: 5, letterSpacing: 1 }}>DHOLERA OFFICE</div>
-                <p style={{ fontSize: 12.5, color: C.muted, lineHeight: 1.9 }}>
+                <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.9 }}>
                   Kasindra MDR Road, Kasindra, Dholera,
                   <br />
                   Ahmedabad – 382465, Gujarat
@@ -157,7 +157,7 @@ function ContactPage() {
               <div style={{ background: C.card, border: `1px solid ${C.gold}44`, padding: "52px 38px", textAlign: "center", borderRadius: 2 }}>
                 <div style={{ fontSize: 48, marginBottom: 16 }}>✅</div>
                 <h3 className="serif" style={{ fontSize: 30, fontWeight: 400, marginBottom: 12 }}>Thank You, {form.name}!</h3>
-                <p style={{ color: C.muted, fontSize: 13.5, lineHeight: 1.8, marginBottom: 24 }}>
+                <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.85, marginBottom: 24 }}>
                   We'll call you on {form.phone} within 24 hours.
                   <br />
                   Site visits available 365 days a year.
@@ -208,9 +208,9 @@ function ContactPage() {
                   </a>
                 </div>
                 {submitError && (
-                  <p style={{ fontSize: 11, color: "#e05050", marginTop: 10, textAlign: "center", lineHeight: 1.6 }}>{submitError}</p>
+                  <p style={{ fontSize: 12, color: "#e05050", marginTop: 10, textAlign: "center", lineHeight: 1.6 }}>{submitError}</p>
                 )}
-                <p style={{ fontSize: 10, color: C.muted, marginTop: 12, textAlign: "center", lineHeight: 1.6 }}>
+                <p style={{ fontSize: 11, color: C.muted, marginTop: 12, textAlign: "center", lineHeight: 1.6 }}>
                   Site visits available 365 days a year.
                 </p>
               </div>

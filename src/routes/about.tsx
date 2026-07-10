@@ -22,7 +22,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         <span style={{ color: C.goldL, fontSize: 20, flexShrink: 0, transform: open ? "rotate(45deg)" : "none", transition: "transform .25s" }}>+</span>
       </button>
       {open && (
-        <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.85, padding: "0 4px 20px", maxWidth: 740 }}>{a}</p>
+        <p style={{ fontSize: 14.5, color: C.muted, lineHeight: 1.9, padding: "0 4px 20px", maxWidth: 740 }}>{a}</p>
       )}
     </div>
   );
@@ -43,7 +43,7 @@ function SectionHeading({ eyebrow, title, emphasis }: { eyebrow: string; title: 
 const FAQS = [
   {
     q: "Is DealWithIt Realty the developer of the Dholera SIR projects it lists?",
-    a: "No. RSC Group Dholera is the developer. DealWithIt Realty is RSC Group's RERA-authorised channel partner — we market and sell on their behalf, and we are a separate entity from RSC Group's own site, rscgroupdholera.in.",
+    a: "No. RSC Group Dholera is the developer. DealWithIt Realty is RSC Group's authorised channel partner — we market and sell on their behalf, and we are a separate entity from RSC Group's own site, rscgroupdholera.in.",
   },
   {
     q: "Who founded DealWithIt Realty?",
@@ -62,8 +62,8 @@ const FAQS = [
     a: "Our office is at 904, 9th Floor, Signature-1, Opp. Andaz Party Plot, S.G. Highway, Makarba, Ahmedabad – 380 051. Site visits to Dholera SIR are arranged directly with our team, 365 days a year.",
   },
   {
-    q: "How do I verify RERA registration for a specific project?",
-    a: "RERA registration details are specific to each project and are shared directly when you enquire — contact us on WhatsApp or by phone and we'll provide the registration number for the project you're evaluating.",
+    q: "Are RSC Group's Dholera SIR projects RERA-registered?",
+    a: "No — this category of plotted land in Dholera SIR is not required to be RERA-registered, so we don't claim RERA registration for any project we represent. What applies instead is NA/NOC certification and title-clear status, which we can document project-by-project on request.",
   },
 ];
 
@@ -87,8 +87,8 @@ function AboutPage() {
           <h1 className="serif" style={{ fontWeight: 300, fontSize: "clamp(40px,7vw,84px)", lineHeight: 1 }}>
             Why Investors Trust <em className="gold-text">DealWithIt</em>
           </h1>
-          <p style={{ fontSize: 14, color: C.muted, marginTop: 16, maxWidth: 640, lineHeight: 1.8 }}>
-            RSC Group Dholera's RERA-authorised channel partner for Dholera SIR real estate —
+          <p style={{ fontSize: 15, color: C.muted, marginTop: 16, maxWidth: 640, lineHeight: 1.85 }}>
+            RSC Group Dholera's authorised channel partner for Dholera SIR real estate —
             here's exactly who we are, who we work with, and how we operate.
           </p>
         </div>
@@ -97,8 +97,8 @@ function AboutPage() {
       {/* ── Company story ── */}
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px,8vw,88px) clamp(18px,5vw,40px) clamp(32px,5vw,48px)" }}>
         <SectionHeading eyebrow="Our Story" title="What DealWithIt" emphasis="Actually Is" />
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
-          DealWithIt Realty is a real estate brokerage based in Ahmedabad, operating as the RERA-authorised
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
+          DealWithIt Realty is a real estate brokerage based in Ahmedabad, operating as the authorised
           channel partner for RSC Group Dholera — the developer behind{" "}
           <Link to="/projects/$id" params={{ id: "pride" }} style={{ color: C.goldL }}>Pride</Link>,{" "}
           <Link to="/projects/$id" params={{ id: "aerox" }} style={{ color: C.goldL }}>Aerox</Link>,{" "}
@@ -107,13 +107,13 @@ function AboutPage() {
           <Link to="/projects/$id" params={{ id: "paradise" }} style={{ color: C.goldL }}>Paradise</Link> in
           Dholera Special Investment Region (SIR), Gujarat.
         </p>
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
           We deliberately state this plainly because it matters: DealWithIt Realty is <strong style={{ color: C.white }}>not</strong> RSC
           Group Dholera, and we are not affiliated with RSC Group's own site, rscgroupdholera.in. RSC Group builds
           and holds the land; DealWithIt markets and sells it on their behalf as an authorised sales partner. Every
           project page on this site discloses that relationship in its own terms and conditions.
         </p>
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9 }}>
           Our work is narrow by design — we only represent NA/NOC-certified, title-clear inventory inside Dholera
           SIR, and we don't take on developments outside that scope. That narrowness is the point: it's how a small
           team stays accountable for what it recommends.
@@ -124,13 +124,13 @@ function AboutPage() {
       <section style={{ background: C.card, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px,8vw,88px) clamp(18px,5vw,40px)" }}>
           <SectionHeading eyebrow="Leadership" title="Founded by" emphasis="Yug Agrawal" />
-          <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+          <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
             Yug Agrawal founded DealWithIt Realty after working on the channel-partner side of the real estate
             industry — running onboarding meetings and building broker relationships for another real estate
             group in the region. That work meant sitting on the other side of the table from where DealWithIt
             now sits: sourcing and vetting the partners who sell a developer's inventory, rather than being one.
           </p>
-          <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95 }}>
+          <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9 }}>
             DealWithIt Realty was built directly on that experience — as a channel-partner operation that
             understands what a developer needs from a partner, and what an investor needs from a channel
             partner: a straight answer, a real site visit, and paperwork that holds up.
@@ -141,7 +141,7 @@ function AboutPage() {
       {/* ── Track record ── */}
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px,8vw,88px) clamp(18px,5vw,40px)" }}>
         <SectionHeading eyebrow="Track Record" title="Experience Behind" emphasis="the Brand" />
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 24 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 24 }}>
           RSC Group Dholera, the developer we represent, was founded in 2010 and has delivered 15+ projects in
           Dholera SIR under Mr. Ramrajsinh Chudasama (Director, Rtd. Army). DealWithIt Realty's own track record as
           their channel partner is smaller and more recent by comparison — and we'd rather point to what's
@@ -168,7 +168,7 @@ function AboutPage() {
           <SectionHeading eyebrow="Why Trust Us" title="What We Do" emphasis="Differently" />
           <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
             {[
-              ["RERA-authorised, not self-declared", "Our channel-partner status with RSC Group Dholera is stated on every project page we represent, alongside the explicit disclosure that we are not RSC Group itself."],
+              ["Our relationship to RSC Group is stated plainly, not blurred", "Every project page discloses that we are RSC Group Dholera's channel partner, not RSC Group itself — a distinction many brokers leave deliberately vague."],
               ["We disclose sold-out inventory instead of hiding it", "Paradise is marked \"Sold Out\" across this site rather than left listed as available — we'd rather lose a lead than misrepresent inventory."],
               ["We publish the research, not just the pitch", "Our blog carries 11+ long-form articles on pricing, risk, and Dholera SIR's infrastructure timeline — written for due diligence, not just to rank."],
               ["Project details are specific, not vague", "Survey numbers, TP/FP references, and zone classifications are listed on each project page instead of generic \"prime location\" language."],
@@ -178,7 +178,7 @@ function AboutPage() {
                 <div style={{ width: 6, height: 6, background: C.gold, marginTop: 8, flexShrink: 0, transform: "rotate(45deg)" }} />
                 <div>
                   <div style={{ fontSize: 14.5, fontWeight: 600, color: C.white, marginBottom: 4 }}>{t}</div>
-                  <div style={{ fontSize: 13, color: C.muted, lineHeight: 1.8 }}>{d}</div>
+                  <div style={{ fontSize: 14, color: C.muted, lineHeight: 1.8 }}>{d}</div>
                 </div>
               </div>
             ))}
@@ -189,19 +189,19 @@ function AboutPage() {
       {/* ── Dholera expertise ── */}
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px,8vw,88px) clamp(18px,5vw,40px)" }}>
         <SectionHeading eyebrow="Local Expertise" title="What We Know About" emphasis="Dholera SIR" />
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
           Every project we represent sits inside Dholera Special Investment Region — India's first greenfield
           smart city and a Delhi-Mumbai Industrial Corridor (DMIC) node. Our team tracks the infrastructure
           specifics that actually move plot values: the Dholera International Airport (under development at
           Navagam), the 109 km, six-lane Ahmedabad-Dholera Expressway (NH-751), the Tata Electronics semiconductor
           FAB plant, the 5000 MW Tata Solar Park, and the planned Gandhinagar-Dholera metro connectivity.
         </p>
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
           That's also why each project page states its own zone and survey references — Pride sits at the
           entrance of DSIR TP2, Regalia 5 is Final Plot 382 in TP 3C1 at Cher, Elanza 2 is close to TP-2 at
           Kharod — instead of leaving location claims unverifiable.
         </p>
-        <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95 }}>
+        <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9 }}>
           We've written this up in more depth than a single page allows. If you're evaluating Dholera SIR
           seriously, start with{" "}
           <Link to="/blog/$slug" params={{ slug: "what-is-dholera-sir" }} style={{ color: C.goldL }}>
@@ -223,17 +223,17 @@ function AboutPage() {
       <section style={{ background: C.card, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(56px,8vw,88px) clamp(18px,5vw,40px)" }}>
           <SectionHeading eyebrow="How We Operate" title="Our Investment" emphasis="Philosophy" />
-          <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+          <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
             We only take on inventory that's NA/NOC certified and title-clear before it reaches a project page —
             not after a buyer raises the question. If a project doesn't clear that bar, we don't represent it,
             regardless of how it's priced.
           </p>
-          <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95, marginBottom: 18 }}>
+          <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9, marginBottom: 18 }}>
             We treat published research as part of the product, not a marketing add-on. Every major buying
             question — pricing, timing, safety, comparison to alternatives — has a dedicated article on this
             site with real figures, not slogans, so a buyer can form their own view before ever speaking to us.
           </p>
-          <p style={{ color: C.muted, fontSize: 14.5, lineHeight: 1.95 }}>
+          <p style={{ color: C.muted, fontSize: 15.5, lineHeight: 1.9 }}>
             And we'd rather tell an investor a project is sold out than keep the door open for a lead. Paradise
             is the case in point: it's marked sold out sitewide, not quietly left listed at "limited availability."
           </p>
@@ -257,8 +257,8 @@ function AboutPage() {
           <h2 className="serif" style={{ fontSize: "clamp(24px,3.5vw,34px)", fontWeight: 300, marginBottom: 16 }}>
             Questions about a <em className="gold-text">specific project?</em>
           </h2>
-          <p style={{ fontSize: 13, color: C.muted, marginBottom: 24, maxWidth: 480, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
-            Browse our current projects or reach the team directly for RERA and site-visit details.
+          <p style={{ fontSize: 14, color: C.muted, marginBottom: 24, maxWidth: 480, marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
+            Browse our current projects or reach the team directly for NA/NOC documentation and site-visit details.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <Link to="/projects" className="btn-gold">View Projects</Link>
@@ -283,7 +283,7 @@ function AboutRoute() {
     name: "DealWithIt Real Estate",
     url: SITE_ORIGIN,
     description:
-      "RERA-authorised channel partner for RSC Group Dholera's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
+      "Authorised channel partner for RSC Group Dholera's Dholera SIR projects. Not affiliated with rscgroupdholera.in.",
     telephone: "+919319319501",
     email: "yug.dealwithit@gmail.com",
     address: {
@@ -334,17 +334,17 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About DealWithIt Realty | RSC Group's Dholera SIR Channel Partner" },
-      { name: "description", content: "DealWithIt Realty is RSC Group Dholera's RERA-authorised channel partner for Dholera SIR real estate. Learn who we are, our founder, and how we operate — factually, not in marketing language." },
+      { name: "description", content: "DealWithIt Realty is RSC Group Dholera's authorised channel partner for Dholera SIR real estate. Learn who we are, our founder, and how we operate — factually, not in marketing language." },
       { name: "keywords", content: "dealwithit realty, dholera channel partner, rsc group dholera partner, dholera real estate broker, yug agrawal dealwithit" },
       { property: "og:title", content: "About DealWithIt Realty | RSC Group's Dholera SIR Channel Partner" },
-      { property: "og:description", content: "RSC Group Dholera's RERA-authorised channel partner — who we are, our founder, and how we operate." },
+      { property: "og:description", content: "RSC Group Dholera's authorised channel partner — who we are, our founder, and how we operate." },
       { property: "og:url", content: `${SITE_ORIGIN}/about` },
       { property: "og:type", content: "website" },
       { property: "og:image", content: `${SITE_ORIGIN}/og-image.png` },
       { property: "og:image:alt", content: "About DealWithIt Realty" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "About DealWithIt Realty | RSC Group's Dholera SIR Channel Partner" },
-      { name: "twitter:description", content: "RSC Group Dholera's RERA-authorised channel partner — who we are, our founder, and how we operate." },
+      { name: "twitter:description", content: "RSC Group Dholera's authorised channel partner — who we are, our founder, and how we operate." },
       { name: "twitter:image", content: `${SITE_ORIGIN}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: `${SITE_ORIGIN}/about` }],

@@ -25,7 +25,7 @@ function ProjectsPage() {
           <h1 className="serif" style={{ fontWeight: 300, fontSize: "clamp(40px,7vw,84px)", lineHeight: 1 }}>
             Our <em className="gold-text">Projects</em>
           </h1>
-          <p style={{ fontSize: 14, color: C.muted, marginTop: 16, maxWidth: 560, lineHeight: 1.8 }}>
+          <p style={{ fontSize: 15, color: C.muted, marginTop: 16, maxWidth: 560, lineHeight: 1.8 }}>
             A curated portfolio of residential, commercial and township plots across Dholera Smart City.
           </p>
         </div>
@@ -56,7 +56,7 @@ function ProjectsPage() {
               <div style={{ fontSize: 11, letterSpacing: 2, color: p.color, border: `1px solid ${p.color}44`, display: "inline-block", padding: "4px 11px", marginBottom: 14, textTransform: "uppercase" }}>{p.cat}</div>
               <h2 className="serif" style={{ fontWeight: 400, marginBottom: 8, fontSize: "clamp(30px,3.5vw,44px)" }}>{p.name}</h2>
               <div style={{ fontSize: 12, color: C.goldL, letterSpacing: 1.3, marginBottom: 14, display: "flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: p.color, display: "inline-block" }} />{p.loc}</div>
-              <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.8, marginBottom: 18 }}>{p.desc}</p>
+              <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.8, marginBottom: 18 }}>{p.desc}</p>
               <div style={{ display: "flex", gap: 22, marginBottom: 20 }}>
                 <div>
                   <div style={{ fontSize: 11, color: C.muted, marginBottom: 3, letterSpacing: 1 }}>PLOTS</div>

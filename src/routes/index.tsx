@@ -77,7 +77,7 @@ function StatCounter({ n, suffix, l }: Stat) {
 const TICKER = [
   "RSC Group Dholera",
   "Dholera Triangle Infra",
-  "RERA Registered",
+  "RSC Group Est. 2010",
   "NA | NOC | Title Clear",
   "EMI Available",
   "365-Day Site Visits",
@@ -100,7 +100,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         <span style={{ color: C.goldL, fontSize: 20, flexShrink: 0, transform: open ? "rotate(45deg)" : "none", transition: "transform .25s" }}>+</span>
       </button>
       {open && (
-        <p style={{ fontSize: 13, color: C.muted, lineHeight: 1.85, padding: "0 4px 20px", maxWidth: 740 }}>{a}</p>
+        <p style={{ fontSize: 14.5, color: C.muted, lineHeight: 1.9, padding: "0 4px 20px", maxWidth: 740 }}>{a}</p>
       )}
     </div>
   );
@@ -204,10 +204,10 @@ function HomePage({ posts }: { posts: BlogSummary[] }) {
               <br />
               <em className="gold-text">Creating Future</em>
             </h2>
-            <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.95, marginBottom: 14 }}>
+            <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.95, marginBottom: 14 }}>
               DealWithIt Real Estate partners with RSC Group Dholera — founded in 2010, pioneers in Dholera SIR. Led by Mr. Ramrajsinh Chudasama (Director, Rtd. Army).
             </p>
-            <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.95, marginBottom: 28 }}>
+            <p style={{ color: C.muted, fontSize: 15, lineHeight: 1.95, marginBottom: 28 }}>
               We offer Residential, Commercial and Industrial land projects — safe investments with high returns in India's most ambitious urban project.
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
@@ -270,7 +270,7 @@ function HomePage({ posts }: { posts: BlogSummary[] }) {
               <div style={{ padding: 26 }}>
                 <h3 className="serif" style={{ fontSize: 28, fontWeight: 400, marginBottom: 6 }}>{p.name}</h3>
                 <div style={{ fontSize: 11, color: C.goldL, letterSpacing: 1.3, marginBottom: 10, display: "flex", alignItems: "center", gap: 7 }}><span style={{ width: 5, height: 5, borderRadius: 2, background: p.color, display: "inline-block" }} />{p.loc}</div>
-                <p style={{ fontSize: 13.5, color: C.muted, lineHeight: 1.75, marginBottom: 16 }}>{p.desc}</p>
+                <p style={{ fontSize: 14.5, color: C.muted, lineHeight: 1.8, marginBottom: 16 }}>{p.desc}</p>
                 <div className="magnetic-btn" style={{ display: "inline-flex", alignItems: "center", gap: 8, color: p.soldOut ? C.muted : p.color, fontSize: 11, letterSpacing: 1.8, textTransform: "uppercase" }}>
                   <span>{p.soldOut ? "View Details" : "Explore"}</span>
                   <span>→</span>
@@ -296,7 +296,7 @@ function HomePage({ posts }: { posts: BlogSummary[] }) {
             <br />
             <em className="gold-text">Secure Your Future</em>
           </h2>
-          <p style={{ color: C.muted, fontSize: 14, maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.85 }}>
+          <p style={{ color: C.muted, fontSize: 15, maxWidth: 480, margin: "0 auto 32px", lineHeight: 1.85 }}>
             Early investors in Dholera SIR gain first-mover advantage in India's most ambitious urban project.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
