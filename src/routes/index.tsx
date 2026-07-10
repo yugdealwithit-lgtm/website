@@ -7,6 +7,8 @@ import { WaIcon } from "@/components/icons";
 import { DholeraCorridor } from "@/components/dholera-corridor";
 import { useReveal } from "@/hooks/use-reveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
+import { IMGS } from "@/lib/images";
+import { fetchBlogSummaries, type BlogSummary } from "@/lib/related-content";
 
 interface Stat {
   n: string;
@@ -104,7 +106,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   );
 }
 
-function HomePage() {
+function HomePage({ posts }: { posts: BlogSummary[] }) {
   useReveal();
   const magnetic = useMagnetic();
   return (
@@ -282,6 +284,9 @@ function HomePage() {
         </div>
       </section>
 
+      {/* ── FEATURED INSIGHTS ── */}
+      {posts.length > 0 && <FeaturedInsights posts={posts} />}
+
       {/* ── CTA BANNER ── */}
       <section style={{ background: `linear-gradient(135deg,${C.gold}26 0%,${C.black} 48%,${C.goldL}14 100%)`, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "clamp(60px,9vw,100px) clamp(18px,5vw,40px)", textAlign: "center" }}>
@@ -327,6 +332,52 @@ function HomePage() {
         }
       `}</style>
     </div>
+  );
+}
+
+/** Server-rendered "Featured Insights" — top N recent posts, fetched live
+ *  in the route loader so the list (and its links) stay current with no
+ *  manual curation, and are present in the initial HTML for crawlers. */
+function FeaturedInsights({ posts }: { posts: BlogSummary[] }) {
+  return (
+    <section style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(60px,9vw,100px) clamp(18px,5vw,40px)" }}>
+      <div className="reveal-on-scroll" style={{ textAlign: "center", marginBottom: 56 }}>
+        <div className="sl" style={{ marginBottom: 10 }}>Insights & Updates</div>
+        <div className="divl divc" style={{ width: 54, height: 1 }} />
+        <h2 className="serif" style={{ fontWeight: 400, fontSize: "clamp(30px,4.5vw,58px)" }}>
+          Latest <em className="gold-text">Insights</em>
+        </h2>
+      </div>
+      <div className="reveal-on-scroll" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))", gap: 22 }}>
+        {posts.map((p) => (
+          <Link
+            key={p.slug}
+            to="/blog/$slug"
+            params={{ slug: p.slug }}
+            className="proj-card"
+            style={{ position: "relative", background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "flex", flexDirection: "column", borderRadius: 4 }}
+          >
+            <div className="proj-card-img" style={{ position: "relative", overflow: "hidden", aspectRatio: "16/9" }}>
+              <img src={p.cover_image_url || IMGS.paradise_cover} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}aa 0%,transparent 60%)` }} />
+              {p.category && (
+                <div style={{ position: "absolute", top: 12, left: 12, background: `${C.gold}22`, border: `1px solid ${C.gold}55`, padding: "4px 10px", fontSize: 10, letterSpacing: 1.5, color: C.goldL }}>{p.category}</div>
+              )}
+            </div>
+            <div style={{ padding: 22, display: "flex", flexDirection: "column", flex: 1 }}>
+              <h3 className="serif" style={{ fontSize: 18, fontWeight: 500, lineHeight: 1.3, marginBottom: 10, flex: 1 }}>{p.title}</h3>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, color: C.goldL, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
+                <span>Read More</span>
+                <span>→</span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div style={{ textAlign: "center", marginTop: 44 }}>
+        <Link to="/blogs" className="btn-out">View All Articles</Link>
+      </div>
+    </section>
   );
 }
 
@@ -431,16 +482,21 @@ const FAQ_LD = {
 };
 
 function HomeRoute() {
+  const { posts } = Route.useLoaderData();
   return (
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }} />
-      <HomePage />
+      <HomePage posts={posts} />
     </SiteShell>
   );
 }
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    const posts = await fetchBlogSummaries();
+    return { posts: posts.slice(0, 6) };
+  },
   head: () => ({
     meta: [
       { title: "DealWithIt Realty | Dholera SIR Plots" },

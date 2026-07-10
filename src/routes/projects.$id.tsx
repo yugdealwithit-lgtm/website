@@ -5,6 +5,8 @@ import { PROJECTS, type Project, type ProjectId } from "@/lib/projects";
 import { SiteShell } from "@/components/site-shell";
 import { WaIcon } from "@/components/icons";
 import { MapEmbed, InventoryMap } from "@/components/project-map";
+import { IMGS } from "@/lib/images";
+import { fetchBlogSummaries, postsForProject, type BlogSummary } from "@/lib/related-content";
 
 const TABS = ["overview", "gallery", "amenities", "location", "inventory"] as const;
 type Tab = (typeof TABS)[number];
@@ -62,7 +64,47 @@ const BookingCard = ({ proj }: { proj: Project }) => (
   </aside>
 );
 
-function ProjectDetail({ proj }: { proj: Project }) {
+/** "Learn More" reading list — the educational blog posts most relevant to
+ *  this project, computed live (see src/lib/related-content.ts) rather than
+ *  hardcoded per project. */
+function LearnMore({ posts }: { posts: BlogSummary[] }) {
+  return (
+    <div style={{ borderTop: `1px solid ${C.border}` }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(40px,6vw,72px) clamp(18px,5vw,40px)" }}>
+        <div className="sl" style={{ marginBottom: 10 }}>Learn More</div>
+        <div className="divl" />
+        <h2 className="serif" style={{ fontSize: "clamp(26px,3.5vw,42px)", fontWeight: 400, marginBottom: 28 }}>
+          Helpful <em>Reading</em>
+        </h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 18 }}>
+          {posts.map((p) => (
+            <Link key={p.slug} to="/blog/$slug" params={{ slug: p.slug }} style={{ display: "block" }}>
+              <article
+                className="proj-card"
+                style={{ background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%", borderRadius: 2 }}
+              >
+                <div className="proj-card-img" style={{ position: "relative", overflow: "hidden", aspectRatio: "16/9" }}>
+                  <img src={p.cover_image_url || IMGS.paradise_cover} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}aa 0%,transparent 60%)` }} />
+                </div>
+                <div style={{ padding: "18px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
+                  {p.category && <div style={{ fontSize: 10, letterSpacing: 1.5, color: C.goldL, marginBottom: 8, textTransform: "uppercase" }}>{p.category}</div>}
+                  <h3 className="serif" style={{ fontSize: 18, fontWeight: 500, lineHeight: 1.3, marginBottom: 10, color: C.white, flex: 1 }}>{p.title}</h3>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: C.goldL, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
+                    <span>Read More</span>
+                    <span>→</span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectDetail({ proj, learnMore }: { proj: Project; learnMore: BlogSummary[] }) {
   const [tab, setTab] = useState<Tab>("overview");
   const { id, name, tagline, cat, loc, color, imgs, bookingImg, about, plots, sizes, status, whyInvest, surveyInfo, amenities, locationBenefits } = proj;
 
@@ -290,6 +332,8 @@ function ProjectDetail({ proj }: { proj: Project }) {
         );
       })()}
 
+      {learnMore.length > 0 && <LearnMore posts={learnMore} />}
+
       <style>{`
         @media(min-width:1000px){
           .detail-grid{grid-template-columns:1fr 360px!important;}
@@ -300,7 +344,7 @@ function ProjectDetail({ proj }: { proj: Project }) {
 }
 
 function ProjectDetailRoute() {
-  const { proj } = Route.useLoaderData();
+  const { proj, learnMore } = Route.useLoaderData();
   const geo = MAPS[proj.id as MapKey];
   const ld = {
     "@context": "https://schema.org",
@@ -348,16 +392,18 @@ function ProjectDetailRoute() {
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />}
-      <ProjectDetail proj={proj} />
+      <ProjectDetail proj={proj} learnMore={learnMore} />
     </SiteShell>
   );
 }
 
 export const Route = createFileRoute("/projects/$id")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const proj = PROJECTS[params.id as ProjectId];
     if (!proj) throw notFound();
-    return { proj };
+    const posts = await fetchBlogSummaries();
+    const learnMore = postsForProject(proj, posts, 4);
+    return { proj, learnMore };
   },
   head: ({ loaderData, params }) => {
     const proj = loaderData?.proj;

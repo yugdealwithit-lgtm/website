@@ -3,6 +3,9 @@ import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-route
 import { supabase } from "@/integrations/supabase/client";
 import { C } from "@/lib/site";
 import { SiteShell } from "@/components/site-shell";
+import { IMGS } from "@/lib/images";
+import { type Project } from "@/lib/projects";
+import { fetchBlogSummaries, relatedPosts, projectsForPost, type BlogSummary } from "@/lib/related-content";
 
 // 301 redirects from deduped/malformed legacy slugs to their canonical post.
 // Keeps already-crawled duplicate URLs consolidated instead of 404-ing.
@@ -18,14 +21,18 @@ export const Route = createFileRoute("/blog/$slug")({
     if (canonical) {
       throw redirect({ to: "/blog/$slug", params: { slug: canonical }, statusCode: 301 });
     }
-    const { data, error } = await supabase
-      .from("blogs")
-      .select("*")
-      .eq("slug", params.slug)
-      .eq("status", "published")
-      .maybeSingle();
+    const [{ data, error }, summaries] = await Promise.all([
+      supabase.from("blogs").select("*").eq("slug", params.slug).eq("status", "published").maybeSingle(),
+      fetchBlogSummaries(),
+    ]);
     if (error || !data) throw notFound();
-    return { post: data };
+
+    // Internal-linking data — computed live from the current post + the rest
+    // of the catalogue, never hardcoded per post. See src/lib/related-content.ts.
+    const related = relatedPosts(data as BlogSummary, summaries, 3);
+    const recommended = projectsForPost(data, undefined, 2);
+
+    return { post: data, related, recommended };
   },
   head: ({ loaderData, params }) => {
     const p = loaderData?.post;
@@ -72,7 +79,7 @@ function BlogPostRoute() {
 }
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData();
+  const { post, related, recommended } = Route.useLoaderData();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -140,8 +147,13 @@ function BlogPostPage() {
       {/* ── Article ── */}
       <article className="blog-article">
         {post.excerpt && <p className="blog-lead">{post.excerpt}</p>}
-        <div className="blog-body">{renderMarkdown(post.content || "")}</div>
+        <div className="blog-body">
+          <ArticleBody content={post.content || ""} midPost={related[0]} midProject={recommended[0]} />
+        </div>
       </article>
+
+      {related.length > 0 && <RelatedArticles posts={related} />}
+      {recommended.length > 0 && <RecommendedProjects projects={recommended} />}
 
       {/* ── Closing CTA ── */}
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(18px,5vw,40px) clamp(56px,9vw,96px)" }}>
@@ -173,6 +185,97 @@ function BlogMeta({ date, readTime }: { date: string; readTime: string | null })
           <span>{readTime}</span>
         </>
       )}
+    </div>
+  );
+}
+
+/** Splits the rendered markdown into two halves and inserts a compact,
+ *  contextual "keep reading" prompt in between — one related post and one
+ *  recommended project, chosen the same way as the closing sections below.
+ *  Keeps in-body linking natural (a single well-placed prompt) instead of
+ *  rewriting an author's prose to stuff in keyword links. */
+function ArticleBody({ content, midPost, midProject }: { content: string; midPost?: BlogSummary; midProject?: Project }) {
+  const blocks = renderMarkdown(content);
+  if (!midPost && !midProject) return <>{blocks}</>;
+  const mid = Math.ceil(blocks.length / 2);
+  return (
+    <>
+      {blocks.slice(0, mid)}
+      <div className="blog-inline-related">
+        {midPost && (
+          <Link to="/blog/$slug" params={{ slug: midPost.slug }} className="blog-inline-related-item">
+            <span className="blog-inline-related-kicker">Related reading</span>
+            <span className="blog-inline-related-title">{midPost.title} →</span>
+          </Link>
+        )}
+        {midProject && (
+          <Link to="/projects/$id" params={{ id: midProject.id }} className="blog-inline-related-item">
+            <span className="blog-inline-related-kicker">Explore project</span>
+            <span className="blog-inline-related-title">{midProject.name} — {midProject.loc} →</span>
+          </Link>
+        )}
+      </div>
+      {blocks.slice(mid)}
+    </>
+  );
+}
+
+/** Closing "Related Articles" grid — reuses the same `.proj-card` card
+ *  language as /blogs so it reads as one design system. */
+function RelatedArticles({ posts }: { posts: BlogSummary[] }) {
+  return (
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "clamp(8px,2vw,16px) clamp(18px,5vw,40px) clamp(40px,6vw,64px)" }}>
+      <div className="sl" style={{ marginBottom: 18, color: C.goldL }}>Related Articles</div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 18 }}>
+        {posts.map((p) => (
+          <Link key={p.slug} to="/blog/$slug" params={{ slug: p.slug }} style={{ display: "block" }}>
+            <article
+              className="proj-card"
+              style={{ background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", display: "flex", flexDirection: "column", height: "100%", borderRadius: 2 }}
+            >
+              <div className="proj-card-img" style={{ position: "relative", overflow: "hidden", aspectRatio: "16/9" }}>
+                <img src={p.cover_image_url || IMGS.paradise_cover} alt={p.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}aa 0%,transparent 60%)` }} />
+              </div>
+              <div style={{ padding: "18px 20px 22px", display: "flex", flexDirection: "column", flex: 1 }}>
+                {p.category && <div style={{ fontSize: 10, letterSpacing: 1.5, color: C.goldL, marginBottom: 8, textTransform: "uppercase" }}>{p.category}</div>}
+                <h3 className="serif" style={{ fontSize: 18, fontWeight: 500, lineHeight: 1.3, marginBottom: 10, color: C.white, flex: 1 }}>{p.title}</h3>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, color: C.goldL, fontSize: 10, letterSpacing: 2, textTransform: "uppercase" }}>
+                  <span>Read More</span>
+                  <span>→</span>
+                </div>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** Closing "Recommended Projects" strip — reuses the same `.proj-card`
+ *  language as the homepage/projects grids. */
+function RecommendedProjects({ projects }: { projects: Project[] }) {
+  return (
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 clamp(18px,5vw,40px) clamp(40px,6vw,64px)" }}>
+      <div className="sl" style={{ marginBottom: 18, color: C.goldL }}>Recommended Projects</div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))", gap: 18 }}>
+        {projects.map((p) => (
+          <Link key={p.id} to="/projects/$id" params={{ id: p.id }} style={{ display: "block" }}>
+            <article className="proj-card" style={{ position: "relative", background: C.card, border: `1px solid ${C.border}`, overflow: "hidden", borderRadius: 4 }}>
+              <div className="proj-card-img" style={{ position: "relative", height: 160 }}>
+                <img src={p.imgs[0]} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top,${C.black}dd 0%,transparent 60%)` }} />
+              </div>
+              <div style={{ padding: 18 }}>
+                <div style={{ fontSize: 10.5, letterSpacing: 1.3, color: p.color, marginBottom: 6, textTransform: "uppercase" }}>{p.cat}</div>
+                <h3 className="serif" style={{ fontSize: 22, fontWeight: 500, marginBottom: 4 }}>{p.name}</h3>
+                <div style={{ fontSize: 11, color: C.muted }}>{p.loc}</div>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
@@ -380,6 +483,13 @@ function BlogStyles() {
       .blog-body figcaption{font-size:12px;color:${C.muted};text-align:center;margin-top:11px;letter-spacing:.3px;font-style:italic;}
       .blog-body .blog-inline-img{max-width:100%;border-radius:3px;}
       .blog-body hr{border:none;height:1px;background:linear-gradient(90deg,transparent,${C.gold},transparent);margin:52px auto;width:60%;}
+
+      /* ── Inline mid-article related prompt ── */
+      .blog-inline-related{display:flex;flex-wrap:wrap;gap:14px;margin:12px 0 40px;}
+      .blog-inline-related-item{flex:1 1 240px;display:flex;flex-direction:column;gap:6px;padding:16px 18px;background:${C.card};border:1px solid ${C.border};border-left:2px solid ${C.gold};border-radius:2px;text-decoration:none;transition:border-color .25s,background .25s;}
+      .blog-inline-related-item:hover{border-color:${C.goldL};background:${C.gold}0d;}
+      .blog-inline-related-kicker{font-family:'Inter',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${C.goldL};}
+      .blog-inline-related-title{font-family:'Inter',sans-serif;font-size:14px;color:${C.white};line-height:1.4;}
 
       /* ── Closing CTA ── */
       .blog-cta{background:linear-gradient(135deg,${C.gold}1a,${C.card});border:1px solid ${C.gold}44;padding:clamp(30px,5vw,48px);text-align:center;border-radius:2px;}
