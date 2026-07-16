@@ -29,7 +29,7 @@ export const waMsg = (msg: string): string =>
 
 /** Government Dholera SIR 3D virtual tour (DICDL). */
 export const VIRTUAL_TOUR_URL =
-  "https://dholera.gujarat.gov.in/dholera_virtual_tours/static/src/Dholera%20SIR/data/index.htm";
+  "https://dholera.gujarat.gov.in/dholera_virtual_tours/static/src/DholeraSIR/index.htm";
 
 /** Real GPS coordinates for each project (used by the location map). */
 export const MAPS = {
